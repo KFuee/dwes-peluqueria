@@ -75,6 +75,17 @@ class Trabajador
     array_push($_SESSION['trabajadores'], $this);
   }
 
+  public function removeFromSession()
+  {
+    session_start();
+
+    foreach ($_SESSION['trabajadores'] as $clave => $trabajador) {
+      if ($trabajador->getId() == $this->getId()) {
+        unset($_SESSION['trabajadores'][$clave]);
+      }
+    }
+  }
+
   public function __toString()
   {
     return "Trabajador: " .

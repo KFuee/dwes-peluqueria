@@ -3,17 +3,34 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Nuevos trabajadores</title>
 
+  <title>Nuevo servicio</title>
 </head>
 
 <body>
-  <h2>Inserte nuevo trabajador</h2>
-  <form method="POST" action="?method=auth">
-    <label>servicio</label> <input type="text" value="" name="servicio"><br>
-    <label>precio</label> <input type="text" value="" name="precio"><br>
-    <label>duracion</label> <input type="text" value="" name="duracion"><br>
-    <input type="submit" value="enviar">
+  <h2>Formulario - Dar de alta servicio</h2>
+  <form action="?method=insertar&tipo=servicio" method="post">
+    <label for="nombre">Nombre: </label>
+    <input type="text" name="nombre" id="nombre"><br>
+
+    <br>
+
+    <label for="precio">Precio: </label>
+    <input type="text" name="precio" id="precio"><br>
+
+    <br>
+
+    <label for="precio">Duración (en minutos): </label>
+    <input type="text" name="duracion" id="duracion"><br>
+
+    <br>
+
+    <label for="descripcion">Descripción: </label>
+    <textarea name="descripcion" id="descripcion"></textarea><br>
+
+    <br>
+
+    <input type="submit" value="Dar de alta">
   </form>
 
 </body>

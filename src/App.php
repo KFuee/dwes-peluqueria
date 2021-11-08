@@ -13,22 +13,19 @@ class App
 
   public function home()
   {
-    session_start();
     include('views/index.php');
   }
 
   public function formulario()
   {
-    if (isset($_GET['tipo'])) $tipo = $_GET['tipo'];
-    else $tipo = 'trabajador';
+    $tipo = $_GET['tipo'];
 
     include('views/formularios/' . $tipo . '.php');
   }
 
   public function insertar()
   {
-    if (isset($_GET['tipo'])) $tipo = $_GET['tipo'];
-    else $tipo = 'trabajador';
+    $tipo = $_GET['tipo'];
 
     include('models/' . $tipo . '.php');
 
@@ -36,6 +33,8 @@ class App
     if ($tipo === 'servicio')
       $model = new Servicio(
         $_POST['nombre'],
+        $_POST['precio'],
+        $_POST['duracion'],
         $_POST['descripcion']
       );
     if ($tipo === 'trabajador')
@@ -53,10 +52,36 @@ class App
     header('Location: index.php?method=home');
   }
 
+  public function eliminar()
+  {
+    $id = $_GET['id'];
+    $tipo = $_GET['tipo'];
+
+    include('models/' . $tipo . '.php');
+
+    session_start();
+
+    if ($tipo === "servicio") $arraySesion = $_SESSION["servicios"];
+    else $arraySesion = $_SESSION["trabajadores"];
+
+    foreach ($arraySesion as $clave => $item) {
+      if ($id == $item->getId()) {
+        unset($arraySesion[$clave]);
+
+        if ($tipo === "servicio") {
+          $_SESSION["servicios"] = array_values($arraySesion);
+          header('Location: index.php?method=mostrar&tipo=servicios');
+        } else {
+          $_SESSION["trabajadores"] = array_values($arraySesion);
+          header('Location: index.php?method=mostrar&tipo=trabajadores');
+        }
+      }
+    }
+  }
+
   public function mostrar()
   {
-    if (isset($_GET['tipo'])) $tipo = $_GET['tipo'];
-    else $tipo = 'trabajadores';
+    $tipo = $_GET['tipo'];
 
     if ($tipo === 'servicios')
       include('models/Servicio.php');
