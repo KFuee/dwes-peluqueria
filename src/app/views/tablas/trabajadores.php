@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Consultar trabajadores</title>
 </head>
@@ -18,7 +20,7 @@
       $idTrabajador = $trabajador->getId();
 
       echo ($i + 1) . '. ' . $trabajador . ' | ';
-      echo "<a href='?method=eliminar&tipo=trabajador&id=$idTrabajador'>Eliminar item</a><br>";
+      echo "<a href='/formulario/eliminar/trabajador/$idTrabajador'>Eliminar item</a><br>";
     }
   } else echo 'No se han encontrado trabajadores.';
   ?>

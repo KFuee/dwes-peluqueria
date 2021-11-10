@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
-  <script src="../../assets/javascript/rellenarTabla.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Consultar servicios</title>
 </head>
@@ -19,7 +20,7 @@
       $idServicio = $servicio->getId();
 
       echo ($i + 1) . '. ' . $servicio . ' | ';
-      echo "<a href='?method=eliminar&tipo=servicio&id=$idServicio'>Eliminar item</a><br>";
+      echo "<a href='/formulario/eliminar/servicio/$idServicio'>Eliminar item</a><br>";
     }
   } else echo 'No se han encontrado servicios.';
   ?>

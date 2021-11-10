@@ -23,46 +23,6 @@ class Trabajador
     return $this->id;
   }
 
-  public function getNombre()
-  {
-    return $this->nombre;
-  }
-
-  public function getApellidos()
-  {
-    return $this->apellidos;
-  }
-
-  public function getSexo()
-  {
-    return $this->sexo;
-  }
-
-  public function getTurno()
-  {
-    return $this->turno;
-  }
-
-  public function setNombre($nombre)
-  {
-    $this->nombre = $nombre;
-  }
-
-  public function setApellidos($apellidos)
-  {
-    $this->apellidos = $apellidos;
-  }
-
-  public function setSexo($sexo)
-  {
-    $this->sexo = $sexo;
-  }
-
-  public function setTurno($turno)
-  {
-    $this->turno = $turno;
-  }
-
   public function addToSession()
   {
     session_start();
@@ -73,17 +33,6 @@ class Trabajador
 
     // Añadimos el trabajador a la sesión
     array_push($_SESSION['trabajadores'], $this);
-  }
-
-  public function removeFromSession()
-  {
-    session_start();
-
-    foreach ($_SESSION['trabajadores'] as $clave => $trabajador) {
-      if ($trabajador->getId() == $this->getId()) {
-        unset($_SESSION['trabajadores'][$clave]);
-      }
-    }
   }
 
   public function __toString()
