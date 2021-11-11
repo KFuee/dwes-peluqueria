@@ -11,6 +11,7 @@
 
 <body>
   <h2>Formulario - Dar de alta servicio</h2>
+
   <form action="/formulario/insertar/servicio" method="post">
     <label for="nombre">Nombre: </label>
     <input type="text" name="nombre" id="nombre"><br>
@@ -34,7 +35,6 @@
 
     <input type="submit" value="Dar de alta">
   </form>
-
 </body>
 
 </html>

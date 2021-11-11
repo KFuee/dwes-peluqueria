@@ -11,6 +11,14 @@
 
 <body>
   <h1>Bienvenid@ a la App de peluquería</h1>
+  <h2><u>Usuario:</u></h2>
+  <ul>
+    <li><a href="/auth/registro">Registrarse</a></li>
+    <li><a href="/formulario/alta/servicio">Iniciar sesión</a></li>
+  </ul>
+
+  <br>
+
   <h2><u>Formularios:</u></h2>
   <ul>
     <li><a href="/formulario/alta/trabajador">Dar de alta trabajador</a></li>

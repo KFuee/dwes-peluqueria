@@ -41,7 +41,6 @@
 
     <input type="submit" value="Dar de alta">
   </form>
-
 </body>
 
 </html>
