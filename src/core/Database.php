@@ -5,18 +5,24 @@ class Database
   private $username;
   private $password;
 
-  protected $conn;
+  private $conn;
+  private static $db;
 
-  public function __construct()
+  private function __construct()
   {
-    $this->host = "mysql:host=database:3306;dbname=docker";
+    $this->host = "mysql:host=database:3306;dbname=peluqueria";
     $this->username = "root";
     $this->password = $_ENV['MYSQL_ROOT_PASSWORD'];
 
     $this->dbConnection();
   }
 
-  public function dbConnection()
+  function __destruct()
+  {
+    $this->conn = null;
+  }
+
+  private function dbConnection()
   {
     try {
       $this->conn = new PDO($this->host, $this->username, $this->password);
@@ -27,8 +33,12 @@ class Database
     }
   }
 
-  public function getConnection()
+  public static function getConnection()
   {
-    return $this->conn;
+    if (self::$db == null) {
+      self::$db = new Database();
+    }
+
+    return self::$db->conn;
   }
 }

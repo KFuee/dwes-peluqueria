@@ -4,6 +4,7 @@ class FormularioController
   public function alta($atributos)
   {
     $tipo = $atributos[0];
+    //Require de la vista del formulario
     require 'app/views/formularios/' . $tipo . '.php';
   }
 
@@ -18,7 +19,7 @@ class FormularioController
     // Insertar el objeto en la sesión
     $modelo->addToSession();
 
-    // Redireccionamos a la página de inicio
+    // Redireccionar al usuario a la página de inicio
     header('Location: /home');
   }
 
@@ -31,10 +32,12 @@ class FormularioController
 
     session_start();
 
+    // Obtener el objeto de la sesión
     if ($tipo === 'Trabajador')
       $arraySession = $_SESSION['trabajadores'];
     else $arraySession = $_SESSION['servicios'];
 
+    // Eliminar el objeto de la sesión
     foreach ($arraySession as $clave => $item) {
       if ($idTrabajador === $item->getId()) {
         unset($arraySession[$clave]);
