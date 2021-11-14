@@ -6,18 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Registro</title>
+  <title>Iniciar sesión</title>
 </head>
 
 <body>
-  <h2>Formulario - Registro</h2>
+  <h2>Formulario - Iniciar sesión</h2>
 
-  <form action="/auth/registro_post" method="post">
-    <label for="nombre">Nombre completo: </label>
-    <input type="text" name="nombre" id="nombre"><br>
-
-    <br>
-
+  <form action="/auth/login_post" method="post">
     <label for="email">Email: </label>
     <input type="text" name="email" id="email"><br>
 
@@ -28,7 +23,7 @@
 
     <br>
 
-    <input type="submit" value="Registrarse">
+    <input type="submit" value="Iniciar sesión">
   </form>
 </body>
 

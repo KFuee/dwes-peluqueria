@@ -3,7 +3,21 @@ class App
 {
   public function __construct()
   {
+    $this->loadModels();
+    // Comprobar si la sesión está iniciada
+    if (session_status() == PHP_SESSION_NONE) session_start();
+
+    // Cargar el controlador y la acción introducida
     $this->run();
+  }
+
+  // Cargar modelos antes de iniciar la sesión para evitar errores
+  public function loadModels()
+  {
+    $models = glob('app/models/*.php');
+    foreach ($models as $model) {
+      require_once $model;
+    }
   }
 
   public function run()
@@ -44,6 +58,12 @@ class App
     } else {
       $this->errorNotFound('metodo');
     }
+  }
+
+  public static function redirect($url)
+  {
+    header("Location: $url");
+    exit;
   }
 
   // Función para manejar errores

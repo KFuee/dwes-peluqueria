@@ -25,8 +25,6 @@ class Trabajador
 
   public function addToSession()
   {
-    session_start();
-
     // Si no existe la sesión, la creamos
     if (!isset($_SESSION['trabajadores']))
       $_SESSION['trabajadores'] = array();
