@@ -13,10 +13,14 @@ services:
       - database
     volumes:
       - ${DOCUMENT_ROOT-./www}:/var/www/html
+      - ./vendor:/var/www/vendor
+      - ./composer.json:/var/www/composer.json
+      - ./composer.lock:/var/www/composer.lock
       - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
       - ${VHOSTS_DIR-./config/vhosts}:/etc/apache2/sites-enabled
       - ${LOG_DIR-./logs/apache2}:/var/log/apache2
     environment:
+      APP_ENV: ${APP_ENV}
       APACHE_DOCUMENT_ROOT: ${APACHE_DOCUMENT_ROOT-/var/www/html}
       PMA_PORT: ${HOST_MACHINE_PMA_PORT}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
