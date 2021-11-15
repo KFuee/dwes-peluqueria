@@ -13,6 +13,17 @@ if (isset($_SESSION['usuario']))
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Home</title>
+
+  <style>
+    a {
+      color: #0000EE;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: #0000EE;
+    }
+  </style>
 </head>
 
 <body>
