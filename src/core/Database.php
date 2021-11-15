@@ -1,7 +1,7 @@
 <?php
 class Database
 {
-  private $host;
+  private $uri;
   private $username;
   private $password;
 
@@ -10,8 +10,10 @@ class Database
 
   private function __construct()
   {
-    $this->host = "mysql:host=database:3306;dbname=peluqueria";
-    $this->username = "root";
+    $this->uri = "mysql:host="
+      . $_ENV['DB_HOST'] . ":" . $_ENV['DB_PORT'] .
+      ";dbname=" . $_ENV['DB_NAME'];
+    $this->username = $_ENV['DB_USER'];
     $this->password = $_ENV['MYSQL_ROOT_PASSWORD'];
 
     $this->dbConnection();
@@ -25,7 +27,7 @@ class Database
   private function dbConnection()
   {
     try {
-      $this->conn = new PDO($this->host, $this->username, $this->password);
+      $this->conn = new PDO($this->uri, $this->username, $this->password);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $exception) {
       echo "Ha ocurrido un error conectando con la base de datos: "
