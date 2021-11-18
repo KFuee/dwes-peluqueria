@@ -16,17 +16,35 @@ $servicios = Servicio::all();
 <body>
   <h1>Listado de servicios:</h1>
 
-  <?php
-  if (count($servicios) > 0) {
-    for ($i = 0; $i < count($servicios); $i++) {
-      $servicio = $servicios[$i];
-      $idServicio = $servicio->id;
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Duración</th>
+      <th>Opciones</th>
+    </tr>
 
-      echo ($i + 1) . '. ' . $servicio->nombre . ' | ';
-      echo "<a href='/formulario/eliminar/servicio/$idServicio'>Eliminar item</a><br>";
+    <?php
+    if (count($servicios) > 0) {
+      foreach ($servicios as $servicio) {
+        $idServicio = $servicio->id;
+        echo "<tr>";
+        echo "<td>" . $idServicio . "</td>";
+        echo "<td>" . $servicio->nombre . "</td>";
+        echo "<td>" . $servicio->precio . "</td>";
+        echo "<td>" . $servicio->duracion . "</td>";
+        // Botón eliminar
+        echo "<td>
+                <a href='/formulario/eliminar/servicio/$idServicio'>Eliminar item</a>
+              </td>";
+        echo "</tr>";
+      }
+    } else {
+      echo "<tr><td colspan='5'>No hay servicios</td></tr>";
     }
-  } else echo 'No se han encontrado servicios.';
-  ?>
+    ?>
+  </table>
 </body>
 
 </html>
