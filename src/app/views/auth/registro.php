@@ -13,8 +13,13 @@
   <h2>Formulario - Registro</h2>
 
   <form action="/auth/registro_post" method="post">
-    <label for="nombre">Nombre completo: </label>
+    <label for="nombre">Nombre: </label>
     <input type="text" name="nombre" id="nombre"><br>
+
+    <br>
+
+    <label for="apellidos">Apellidos: </label>
+    <input type="text" name="apellidos" id="apellidos"><br>
 
     <br>
 

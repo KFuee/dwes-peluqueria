@@ -11,11 +11,15 @@ class FormularioController
   public function insertar($atributos)
   {
     $tipo = ucwords($atributos[0]);
+    $id = uniqid(strtolower(substr($tipo, 0, 1)) . "-", false);
 
-    // Crear un objeto de la clase Trabajador
-    $modelo = new $tipo(...$_POST);
-    // Insertar el objeto en la sesión
-    $modelo->addToSession();
+    $modelo = new $tipo();
+    $modelo->id = $id;
+    foreach ($_POST as $clave => $valor) {
+      $modelo->$clave = $valor;
+    }
+
+    $modelo->insert();
 
     // Redireccionar al usuario a la página de inicio
     App::redirect("/home");
@@ -24,27 +28,14 @@ class FormularioController
   public function eliminar($atributos)
   {
     $tipo = ucwords($atributos[0]);
-    $idTrabajador = $atributos[1];
+    $id = $atributos[1];
 
-    // Obtener el objeto de la sesión
-    if ($tipo === 'Trabajador')
-      $arraySession = $_SESSION['trabajadores'];
-    else $arraySession = $_SESSION['servicios'];
+    $modelo = new $tipo();
+    $modelo->id = $id;
 
-    // Eliminar el objeto de la sesión
-    foreach ($arraySession as $clave => $item) {
-      if ($idTrabajador !== $item->getId())
-        return;
+    $modelo->delete();
 
-      unset($arraySession[$clave]);
-
-      if ($tipo === 'Trabajador') {
-        $_SESSION['trabajadores'] = array_values($arraySession);
-        App::redirect("/tabla/mostrar/trabajadores");
-      } else {
-        $_SESSION['servicios'] = array_values($arraySession);
-        App::redirect("/tabla/mostrar/servicios");
-      }
-    }
+    if ($tipo === "Servicio")
+      App::redirect("/tabla/mostrar/servicios");
   }
 }

@@ -13,20 +13,31 @@ class AuthController
     require 'app/views/auth/login.php';
   }
 
+  public function datos_usuario()
+  {
+    // Require de la vista ajustes
+    require 'app/views/auth/ajustes.php';
+  }
+
   public function registro_post()
   {
     // Comprobar que el usuario no exista
-    if (Usuario::existe($_POST['email'])) {
+    if (Usuario::find($_POST['email'])) {
       // Si existe, redirigir a login
       App::redirect("/auth/login");
     }
 
     $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    // Crear un nuevo usuario
-    $usuario = new Usuario($_POST['nombre'], $_POST['email'], $hash);
+    // Instanciar un nuevo usuario y asignar propiedades
+    $usuario = new Usuario();
+    $usuario->id = uniqid("u-", false);
+    $usuario->nombre = $_POST['nombre'];
+    $usuario->apellidos = $_POST['apellidos'];
+    $usuario->email = $_POST['email'];
+    $usuario->password = $hash;
 
     // Guardar el usuario en la base de datos
-    $usuario->insertar();
+    $usuario->insert();
 
     // Redirigir a login
     App::redirect("/auth/login");
@@ -34,23 +45,30 @@ class AuthController
 
   public function login_post()
   {
+    $usuario = Usuario::find($_POST['email']);
     // Comprobar que el usuario exista
-    if (!Usuario::existe($_POST['email'])) {
-      // Si no existe, redirigir a registro
+    if (!$usuario) {
       App::redirect("/auth/register");
+      return;
     }
 
     // Comprobar que la contraseña sea correcta
     if (!password_verify(
       $_POST['password'],
-      Usuario::getPassword($_POST['email'])
+      $usuario->password
     )) {
       // Si no es correcta, redirigir a login
       App::redirect("/auth/login");
     }
 
     // Crear una sesión
-    $_SESSION['usuario'] = $_POST['email'];
+    $_SESSION['usuario'] = [
+      'id' => $usuario->id,
+      'nombre' => $usuario->nombre,
+      'apellidos' => $usuario->apellidos,
+      'email' => $usuario->email,
+      'rol' => $usuario->rol
+    ];
 
     // Redirigir a la página principal
     App::redirect("/home");

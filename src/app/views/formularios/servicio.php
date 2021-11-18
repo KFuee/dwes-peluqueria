@@ -23,7 +23,7 @@
 
     <br>
 
-    <label for="precio">Duración (en minutos): </label>
+    <label for="duracion">Duración (en minutos): </label>
     <input type="text" name="duracion" id="duracion"><br>
 
     <br>

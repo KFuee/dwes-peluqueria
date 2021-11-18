@@ -37,9 +37,8 @@ class Database
 
   public static function getConnection()
   {
-    if (self::$db == null) {
+    if (self::$db == null)
       self::$db = new Database();
-    }
 
     return self::$db->conn;
   }

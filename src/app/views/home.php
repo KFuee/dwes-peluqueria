@@ -1,7 +1,7 @@
 <?php
-$logged = false;
+$usuario = null;
 if (isset($_SESSION['usuario']))
-  $logged = true;
+  $usuario = $_SESSION['usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -30,18 +30,20 @@ if (isset($_SESSION['usuario']))
   <h1>Bienvenid@ a la App de peluquería</h1>
   <?php
   // Comprueba si el usuario está logueado
-  if ($logged) {
+  if ($usuario) {
     // Muestra los datos del usuario
-    echo "<p>Iniciado sesión como: <b>" . $_SESSION['usuario'] . "</b></p>";
+    echo "<p>Iniciado sesión como: <b>" . $usuario['email'] . "</b>, eres <b>"
+      . $usuario['rol'] . "</b></p>";
   }
   ?>
 
   <h2><u>Usuario:</u></h2>
   <ul>
     <?php
-    if ($logged)
+    if ($usuario) {
+      echo "<li><a href='/auth/datos_usuario'>Datos</a></li>";
       echo "<li><a href='/auth/logout'>Cerrar sesión</a></li>";
-    else {
+    } else {
       echo "<li><a href='/auth/registro'>Registrarse</a></li>";
       echo "<li><a href='/auth/login'>Iniciar sesión</a></li>";
     }
@@ -50,19 +52,26 @@ if (isset($_SESSION['usuario']))
 
   <br>
 
-  <h2><u>Formularios:</u></h2>
-  <ul>
-    <li><a href="/formulario/alta/trabajador">Dar de alta trabajador</a></li>
-    <li><a href="/formulario/alta/servicio">Dar de alta servicio</a></li>
-  </ul>
+  <?php
+  if ($usuario) {
+    if ($usuario['rol'] === 'gerente' || $usuario['rol'] === 'administrador') {
+      echo "<h2><u>Formularios:</u></h2>";
 
-  <br>
+      echo "<ul>";
+      echo "<li><a href='/formulario/alta/trabajador'>Alta trabajador</a></li>";
+      echo "<li><a href='/formulario/alta/servicio'>Alta servicio</a></li>";
+      echo "</ul>";
 
-  <h2><u>Tablas de datos:</u></h2>
-  <ul>
-    <li><a href="/tabla/mostrar/trabajadores">Trabajadores</a></li>
-    <li><a href="/tabla/mostrar/servicios">Servicios</a></li>
-  </ul>
+      echo "<br>";
+
+      echo "<h2><u>Tablas de datos:</u></h2>";
+      echo "<ul>";
+      echo "<li><a href='/tabla/mostrar/trabajadores'>Trabajadores</a></li>";
+      echo "<li><a href='/tabla/mostrar/servicios'>Servicios</a></li>";
+      echo "</ul>";
+    }
+  }
+  ?>
 </body>
 
 </html>

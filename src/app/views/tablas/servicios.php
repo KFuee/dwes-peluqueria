@@ -1,3 +1,7 @@
+<?php
+$servicios = Servicio::all();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,13 +17,12 @@
   <h1>Listado de servicios:</h1>
 
   <?php
-  if (isset($_SESSION['servicios']) && count($_SESSION['servicios']) > 0) {
-    $servicios = $_SESSION['servicios'];
+  if (count($servicios) > 0) {
     for ($i = 0; $i < count($servicios); $i++) {
       $servicio = $servicios[$i];
-      $idServicio = $servicio->getId();
+      $idServicio = $servicio->id;
 
-      echo ($i + 1) . '. ' . $servicio . ' | ';
+      echo ($i + 1) . '. ' . $servicio->nombre . ' | ';
       echo "<a href='/formulario/eliminar/servicio/$idServicio'>Eliminar item</a><br>";
     }
   } else echo 'No se han encontrado servicios.';

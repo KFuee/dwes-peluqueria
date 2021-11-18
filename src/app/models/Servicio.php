@@ -1,45 +1,75 @@
 <?php
 class Servicio
 {
-  private $id;
-
-  private $nombre;
-  private $precio;
-  private $duracion;
-  private $descripcion;
-
-  public function __construct($nombre, $precio, $duracion, $descripcion)
+  public function __construct()
   {
-    $this->id = uniqid("s_");
-
-    $this->nombre = $nombre;
-    $this->precio = $precio;
-    $this->duracion = $duracion;
-    $this->descripcion = $descripcion;
+    $this->db = Database::getConnection();
   }
 
-  public function getId()
+  public static function all()
   {
-    return $this->id;
+    $db = Database::getConnection();
+    $sql = "SELECT * FROM servicios";
+
+    $stmt = $db->query($sql);
+
+    $servicios = $stmt->fetchAll(PDO::FETCH_CLASS, Servicio::class);
+
+    return $servicios;
   }
 
-  public function addToSession()
+  public static function find($id)
   {
-    // Si no existe la sesión, la creamos
-    if (!isset($_SESSION['servicios']))
-      $_SESSION['servicios'] = array();
+    $db = Database::getConnection();
+    $sql = "SELECT * FROM servicios WHERE id = :id";
 
-    // Añadimos el trabajador a la sesión
-    array_push($_SESSION['servicios'], $this);
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":id", $id);
+    $stmt->execute();
+
+    $servicio = $stmt->fetchObject("Servicio");
+
+    return $servicio;
   }
 
-  public function __toString()
+  public function insert()
   {
-    return "Servicio: " .
-      $this->id .
-      " | " . $this->nombre .
-      " | " . $this->precio .
-      " | " . $this->duracion .
-      " | " . $this->descripcion;
+    $sql = "INSERT INTO servicios (id, nombre, precio, duracion, descripcion)
+            VALUES (:id, :nombre, :precio, :duracion, :descripcion)";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(":id", $this->id);
+    $stmt->bindValue(":nombre", $this->nombre);
+    $stmt->bindValue(":precio", $this->precio);
+    $stmt->bindValue(":duracion", $this->duracion);
+    $stmt->bindValue(":descripcion", $this->descripcion);
+
+    $stmt->execute();
+  }
+
+  public function delete()
+  {
+    $sql = "DELETE FROM servicios WHERE id = :id";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(":id", $this->id);
+
+    $stmt->execute();
+  }
+
+  public function save()
+  {
+    $sql = "UPDATE servicios
+            SET nombre = :nombre, precio = :precio,
+                duracion = :duracion, descripcion = :descripcion
+            WHERE id = :id";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(":nombre", $this->nombre);
+    $stmt->bindValue(":precio", $this->precio);
+    $stmt->bindValue(":duracion", $this->duracion);
+    $stmt->bindValue(":descripcion", $this->descripcion);
+
+    $stmt->execute();
   }
 }

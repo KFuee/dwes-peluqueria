@@ -3,68 +3,81 @@ require_once 'core/Database.php';
 
 class Usuario
 {
-  public $id;
-  public $nombre;
-  public $email;
-  public $password;
-
-  public function __construct($nombre, $email, $password)
+  public function __construct()
   {
     $this->db = Database::getConnection();
-
-    $this->id = uniqid("u-", false);
-    $this->nombre = $nombre;
-    $this->email = $email;
-    $this->password = $password;
   }
 
-  public static function getUser($email)
+  public static function all()
   {
     $db = Database::getConnection();
+    $sql = "SELECT * FROM usuarios";
 
-    $sql = "SELECT password FROM usuarios WHERE email = :email";
+    $stmt = $db->query($sql);
+
+    $usuarios = $stmt->fetchAll(PDO::FETCH_CLASS, User::class);
+
+    return $usuarios;
+  }
+
+  public static function find($email)
+  {
+    $db = Database::getConnection();
+    $sql = "SELECT * FROM usuarios WHERE email = :email";
 
     $stmt = $db->prepare($sql);
-
-    $stmt->bindParam(":email", $email);
-
+    $stmt->bindValue(":email", $email);
     $stmt->execute();
 
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $usuario = $stmt->fetchObject("Usuario");
+
+    return $usuario;
   }
 
   public static function getPassword($email)
   {
-    $user = self::getUser($email);
-    return $user['password'];
+    $usuario = self::find($email);
+    return $usuario->password;
   }
 
-  public static function existe($email)
+  public function insert()
   {
-    $db = Database::getConnection();
-
-    $sql = "SELECT * FROM usuarios WHERE email = :email";
-
-    $stmt = $db->prepare($sql);
-
-    $stmt->bindParam(":email", $email);
-
-    $stmt->execute();
-
-    return $stmt->rowCount() > 0;
-  }
-
-  public function insertar()
-  {
-    $sql = "INSERT INTO usuarios (id, nombre, email, password)
-            VALUES (:id, :nombre, :email, :password)";
+    $sql = "INSERT INTO usuarios (id, nombre, apellidos, email, password)
+            VALUES (:id, :nombre, :apellidos, :email, :password)";
 
     $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(":id", $this->id);
+    $stmt->bindValue(":nombre", $this->nombre);
+    $stmt->bindValue(":apellidos", $this->apellidos);
+    $stmt->bindValue(":email", $this->email);
+    $stmt->bindValue(":password", $this->password);
 
-    $stmt->bindParam(":id", $this->id);
-    $stmt->bindParam(':nombre', $this->nombre);
-    $stmt->bindParam(':email', $this->email);
-    $stmt->bindParam(':password', $this->password);
+    $stmt->execute();
+  }
+
+  public function delete()
+  {
+    $sql = "DELETE FROM usuarios WHERE id = :id";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(":id", $this->id);
+
+    $stmt->execute();
+  }
+
+  public function save()
+  {
+    $sql = "UPDATE usuarios
+            SET nombre = :nombre, apellidos = :apellidos,
+                email = :email, password = :password
+            WHERE id = :id";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(":id", $this->id);
+    $stmt->bindValue(":nombre", $this->nombre);
+    $stmt->bindValue(":apellidos", $this->apellidos);
+    $stmt->bindValue(":email", $this->email);
+    $stmt->bindValue(":password", $this->password);
 
     $stmt->execute();
   }
