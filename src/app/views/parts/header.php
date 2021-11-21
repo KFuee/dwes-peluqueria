@@ -16,26 +16,38 @@ if (isset($_SESSION['usuario']))
           <a class="nav-link active" aria-current="page" href="/home">Home</a>
         </li>
 
-        <?php if ($usuario) { ?>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Formularios
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="/formulario/alta/servicio">Alta servicio</a></li>
-            </ul>
+        <?php
+        if ($usuario) {
+        ?>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page">Pedir cita</a>
           </li>
+        <?php
+        }
+        ?>
+
+        <?php if ($usuario) {
+          if ($usuario['rol'] !== 'cliente') { ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Formularios
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/formulario/alta/servicio">Alta servicio</a></li>
+              </ul>
+            </li>
 
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Tablas de datos
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="/tabla/mostrar/servicios">Mostrar servicios</a></li>
-            </ul>
-          </li>
-        <?php } ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Tablas de datos
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/tabla/mostrar/servicios">Mostrar servicios</a></li>
+              </ul>
+            </li>
+        <?php }
+        } ?>
       </ul>
 
       <form class="d-flex">

@@ -17,7 +17,7 @@ $servicios = Servicio::all();
   <div class="contenido">
     <h2 class="mb-4">Listado de servicios:</h2>
 
-    <table class="table">
+    <table class="table table-bordered">
       <tr>
         <th>#</th>
         <th>Nombre</th>
@@ -30,16 +30,33 @@ $servicios = Servicio::all();
       if (count($servicios) > 0) {
         for ($i = 0; $i < count($servicios); $i++) {
           $servicio = $servicios[$i];
+          $idServicio = $servicio->id;
+          $nombre = $servicio->nombre;
+          $precio = $servicio->precio;
+          $duracion = $servicio->duracion;
+
           echo "<tr>";
+
           echo "<td>" . ($i + 1) . "</td>";
           echo "<td>" . $servicio->nombre . "</td>";
-          echo "<td>" . $servicio->precio . "</td>";
-          echo "<td>" . $servicio->duracion . " min</td>";
-          // Botón eliminar
+          echo "<td>" . $precio . "</td>";
+          echo "<td>" . $duracion . " min</td>";
           echo "<td>
-              <a class='btn btn-outline-danger'
-                 href='/formulario/eliminar/servicio/$servicio->id'>Eliminar</a>
-            </td>";
+                  <button type='button' class='btn btn-primary'
+                   data-bs-toggle='modal'
+                   data-bs-target='#modificarModal'
+                   data-bs-id='$idServicio'
+                   data-bs-nombre='$nombre'
+                   data-bs-precio='$precio'
+                   data-bs-duracion='$duracion'
+                   data-bs-descripcion='$servicio->descripcion'>
+                    Modificar
+                  </button>
+                  <a class='btn btn-danger'
+                     href='/formulario/eliminar/servicio/$idServicio'>Eliminar
+                  </a>
+                </td>";
+
           echo "</tr>";
         }
       } else {
@@ -48,6 +65,9 @@ $servicios = Servicio::all();
       ?>
     </table>
   </div>
+
+  <!-- Modals -->
+  <?php require('app/views/parts/modals/modificarServicio.php'); ?>
 
   <?php require("app/views/parts/scripts.php") ?>
 </body>

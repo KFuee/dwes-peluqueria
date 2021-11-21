@@ -20,7 +20,7 @@ git clone https://github.com/KFuee/dwes-peluqueria.git
 cd dwes-peluqueria
 
 // Modificar según necesidades
-cp .env.example .env
+cp sample.env .env
 
 composer install
 docker-compose up -d

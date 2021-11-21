@@ -65,6 +65,7 @@ class Servicio
             WHERE id = :id";
 
     $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(":id", $this->id);
     $stmt->bindValue(":nombre", $this->nombre);
     $stmt->bindValue(":precio", $this->precio);
     $stmt->bindValue(":duracion", $this->duracion);
