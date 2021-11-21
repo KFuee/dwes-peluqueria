@@ -2,39 +2,43 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php require('app/views/parts/head.php'); ?>
 
   <title>Nuevo servicio</title>
 </head>
 
 <body>
-  <h2>Formulario - Dar de alta servicio</h2>
+  <?php require('app/views/parts/header.php'); ?>
 
-  <form action="/formulario/insertar/servicio" method="post">
-    <label for="nombre">Nombre: </label>
-    <input type="text" name="nombre" id="nombre"><br>
+  <div class="contenido">
+    <h2 class="mb-4">Formulario - Dar de alta servicio</h2>
 
-    <br>
+    <form action="/formulario/insertar/servicio" method="post">
+      <label for="nombre">Nombre: </label>
+      <input type="text" name="nombre" id="nombre"><br>
 
-    <label for="precio">Precio: </label>
-    <input type="text" name="precio" id="precio"><br>
+      <br>
 
-    <br>
+      <label for="precio">Precio: </label>
+      <input type="text" name="precio" id="precio"><br>
 
-    <label for="duracion">Duración (en minutos): </label>
-    <input type="text" name="duracion" id="duracion"><br>
+      <br>
 
-    <br>
+      <label for="duracion">Duración (en minutos): </label>
+      <input type="text" name="duracion" id="duracion"><br>
 
-    <label for="descripcion">Descripción: </label>
-    <textarea name="descripcion" id="descripcion"></textarea><br>
+      <br>
 
-    <br>
+      <label for="descripcion">Descripción: </label>
+      <textarea name="descripcion" id="descripcion"></textarea><br>
 
-    <input type="submit" value="Dar de alta">
-  </form>
+      <br>
+
+      <input type="submit" value="Dar de alta">
+    </form>
+  </div>
+
+  <?php require("app/views/parts/scripts.php") ?>
 </body>
 
 </html>

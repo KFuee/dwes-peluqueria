@@ -48,7 +48,7 @@ class AuthController
     $usuario = Usuario::find($_POST['email']);
     // Comprobar que el usuario exista
     if (!$usuario) {
-      App::redirect("/auth/register");
+      App::redirect("/auth/registro");
       return;
     }
 

@@ -6,45 +6,50 @@ $servicios = Servicio::all();
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php require('app/views/parts/head.php'); ?>
 
   <title>Consultar servicios</title>
 </head>
 
 <body>
-  <h1>Listado de servicios:</h1>
+  <?php require('app/views/parts/header.php'); ?>
 
-  <table border="1">
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Precio</th>
-      <th>Duración</th>
-      <th>Opciones</th>
-    </tr>
+  <div class="contenido">
+    <h2 class="mb-4">Listado de servicios:</h2>
 
-    <?php
-    if (count($servicios) > 0) {
-      foreach ($servicios as $servicio) {
-        $idServicio = $servicio->id;
-        echo "<tr>";
-        echo "<td>" . $idServicio . "</td>";
-        echo "<td>" . $servicio->nombre . "</td>";
-        echo "<td>" . $servicio->precio . "</td>";
-        echo "<td>" . $servicio->duracion . "</td>";
-        // Botón eliminar
-        echo "<td>
-                <a href='/formulario/eliminar/servicio/$idServicio'>Eliminar item</a>
-              </td>";
-        echo "</tr>";
+    <table class="table">
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Duración</th>
+        <th>Opciones</th>
+      </tr>
+
+      <?php
+      if (count($servicios) > 0) {
+        for ($i = 0; $i < count($servicios); $i++) {
+          $servicio = $servicios[$i];
+          echo "<tr>";
+          echo "<td>" . ($i + 1) . "</td>";
+          echo "<td>" . $servicio->nombre . "</td>";
+          echo "<td>" . $servicio->precio . "</td>";
+          echo "<td>" . $servicio->duracion . " min</td>";
+          // Botón eliminar
+          echo "<td>
+              <a class='btn btn-outline-danger'
+                 href='/formulario/eliminar/servicio/$servicio->id'>Eliminar</a>
+            </td>";
+          echo "</tr>";
+        }
+      } else {
+        echo "<tr><td colspan='5'>No hay servicios</td></tr>";
       }
-    } else {
-      echo "<tr><td colspan='5'>No hay servicios</td></tr>";
-    }
-    ?>
-  </table>
+      ?>
+    </table>
+  </div>
+
+  <?php require("app/views/parts/scripts.php") ?>
 </body>
 
 </html>
