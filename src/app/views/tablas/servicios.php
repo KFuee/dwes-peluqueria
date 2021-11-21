@@ -15,33 +15,43 @@ $servicios = Servicio::all();
   <?php require('app/views/parts/header.php'); ?>
 
   <div class="contenido">
+    <?php
+    $breadItems = [
+      '/home' => 'Home',
+      '/tabla/mostrar/servicios' => 'Consultar servicios',
+    ];
+
+    require('app/views/parts/breadcrumb.php');
+    ?>
+
     <h2 class="mb-4">Listado de servicios:</h2>
 
-    <table class="table table-bordered">
-      <tr>
-        <th>#</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Duración</th>
-        <th>Opciones</th>
-      </tr>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Duración</th>
+          <th>Opciones</th>
+        </tr>
 
-      <?php
-      if (count($servicios) > 0) {
-        for ($i = 0; $i < count($servicios); $i++) {
-          $servicio = $servicios[$i];
-          $idServicio = $servicio->id;
-          $nombre = $servicio->nombre;
-          $precio = $servicio->precio;
-          $duracion = $servicio->duracion;
+        <?php
+        if (count($servicios) > 0) {
+          for ($i = 0; $i < count($servicios); $i++) {
+            $servicio = $servicios[$i];
+            $idServicio = $servicio->id;
+            $nombre = $servicio->nombre;
+            $precio = $servicio->precio;
+            $duracion = $servicio->duracion;
 
-          echo "<tr>";
+            echo "<tr>";
 
-          echo "<td>" . ($i + 1) . "</td>";
-          echo "<td>" . $servicio->nombre . "</td>";
-          echo "<td>" . $precio . "</td>";
-          echo "<td>" . $duracion . " min</td>";
-          echo "<td>
+            echo "<td>" . ($i + 1) . "</td>";
+            echo "<td>" . $servicio->nombre . "</td>";
+            echo "<td>" . $precio . "</td>";
+            echo "<td>" . $duracion . " min</td>";
+            echo "<td>
                   <button type='button' class='btn btn-primary'
                    data-bs-toggle='modal'
                    data-bs-target='#modificarModal'
@@ -57,13 +67,14 @@ $servicios = Servicio::all();
                   </a>
                 </td>";
 
-          echo "</tr>";
+            echo "</tr>";
+          }
+        } else {
+          echo "<tr><td colspan='5'>No hay servicios</td></tr>";
         }
-      } else {
-        echo "<tr><td colspan='5'>No hay servicios</td></tr>";
-      }
-      ?>
-    </table>
+        ?>
+      </table>
+    </div>
   </div>
 
   <!-- Modals -->
