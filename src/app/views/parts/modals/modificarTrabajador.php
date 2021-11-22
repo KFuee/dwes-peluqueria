@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/tabla/modificar/trabajador" method="post" id="form-datos">
+        <form action="/trabajador/modificar" method="post" id="form-datos">
           <input type="hidden" name="dni" id="dni" />
           <div class="mb-3">
             <label for="nombre" class="col-form-label">Nombre:</label>

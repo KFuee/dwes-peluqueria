@@ -16,15 +16,9 @@ if (isset($_SESSION['usuario']))
           <a class="nav-link" aria-current="page" href="/home">Home</a>
         </li>
 
-        <?php
-        if ($usuario) {
-        ?>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page">Pedir cita</a>
-          </li>
-        <?php
-        }
-        ?>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page">Pedir cita</a>
+        </li>
 
         <?php if ($usuario) {
           if ($usuario['rol'] !== 'cliente') { ?>
@@ -33,8 +27,8 @@ if (isset($_SESSION['usuario']))
                 Formularios
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/formulario/alta/servicio">Alta servicio</a></li>
-                <li><a class="dropdown-item" href="/formulario/alta/trabajador">Alta trabajador</a></li>
+                <li><a class="dropdown-item" href="/servicio/formulario">Alta servicio</a></li>
+                <li><a class="dropdown-item" href="/trabajador/formulario">Alta trabajador</a></li>
               </ul>
             </li>
 
@@ -44,8 +38,8 @@ if (isset($_SESSION['usuario']))
                 Tablas de datos
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/tabla/mostrar/servicios">Mostrar servicios</a></li>
-                <li><a class="dropdown-item" href="/tabla/mostrar/trabajadores">Mostrar trabajadores</a></li>
+                <li><a class="dropdown-item" href="/servicio">Mostrar servicios</a></li>
+                <li><a class="dropdown-item" href="/trabajador">Mostrar trabajadores</a></li>
               </ul>
             </li>
         <?php }
@@ -55,11 +49,11 @@ if (isset($_SESSION['usuario']))
       <form class="d-flex">
         <?php
         if ($usuario) {
-          echo "<a class='btn btn-outline-success me-2' href='/auth/datos_usuario'>Ajustes</a>";
-          echo "<a class='btn btn-outline-danger' href='/auth/logout'>Cerrar sesión</a>";
+          echo "<a class='btn btn-outline-success me-2' href='/usuario'>Ajustes</a>";
+          echo "<a class='btn btn-outline-danger' href='/usuario/logout'>Cerrar sesión</a>";
         } else {
-          echo "<a class='btn btn-outline-primary me-2' href='/auth/registro'>Registrarse</a>";
-          echo "<a class='btn btn-outline-success' href='/auth/login'>Iniciar sesión</a>";
+          echo "<a class='btn btn-outline-primary me-2' href='/usuario/registro'>Registrarse</a>";
+          echo "<a class='btn btn-outline-success' href='/usuario/login'>Iniciar sesión</a>";
         }
         ?>
       </form>

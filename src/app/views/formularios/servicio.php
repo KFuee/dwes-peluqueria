@@ -14,7 +14,7 @@
     <?php
     $breadItems = [
       '/home' => 'Home',
-      '/formulario/alta/servicio' => 'Nuevo servicio',
+      '/servicio/formulario' => 'Nuevo servicio',
     ];
 
     require('app/views/parts/breadcrumb.php');
@@ -22,7 +22,7 @@
 
     <h2 class="mb-4">Formulario - Dar de alta servicio</h2>
 
-    <form action="/formulario/insertar/servicio" method="post">
+    <form action="/servicio/insertar" method="post">
       <label for="nombre">Nombre: </label>
       <input type="text" name="nombre" id="nombre"><br>
 

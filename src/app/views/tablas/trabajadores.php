@@ -66,7 +66,7 @@ $trabajadores = Trabajador::all();
                     Modificar
                   </button>
                   <a class='btn btn-danger'
-                     href='/tabla/eliminar/trabajador/$dni'>Eliminar
+                     href='/trabajador/eliminar/$dni'>Eliminar
                   </a>
                 </td>";
 

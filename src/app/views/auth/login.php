@@ -13,7 +13,7 @@
   <div class="contenido">
     <h2 class="mb-4">Formulario - Iniciar sesión</h2>
 
-    <form action="/auth/login_post" method="post">
+    <form action="/usuario/login_post" method="post">
       <label for="email">Email: </label>
       <input type="text" name="email" id="email"><br>
 

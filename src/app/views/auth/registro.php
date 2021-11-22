@@ -13,7 +13,7 @@
   <div class="contenido">
     <h2 class="mb-4">Formulario - Registro</h2>
 
-    <form action="/auth/registro_post" method="post">
+    <form action="/usuario/registro_post" method="post">
       <label for="nombre">Nombre: </label>
       <input type="text" name="nombre" id="nombre"><br>
 

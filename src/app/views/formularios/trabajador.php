@@ -14,7 +14,7 @@
     <?php
     $breadItems = [
       '/home' => 'Home',
-      '/formulario/alta/trabajador' => 'Nuevo trabajador',
+      '/trabajador/formulario' => 'Nuevo trabajador',
     ];
 
     require('app/views/parts/breadcrumb.php');
@@ -22,7 +22,7 @@
 
     <h2 class="mb-4">Formulario - Dar de alta trabajador</h2>
 
-    <form action="/formulario/insertar/trabajador" method="post">
+    <form action="/trabajador/insertar" method="post">
       <label for="dni">DNI: </label>
       <input type="text" name="dni" id="dni"><br>
 

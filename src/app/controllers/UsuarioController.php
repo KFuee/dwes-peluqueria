@@ -1,6 +1,12 @@
 <?php
-class AuthController
+class UsuarioController
 {
+  public function index()
+  {
+    // Require de la vista ajustes
+    require 'app/views/auth/ajustes.php';
+  }
+
   public function registro()
   {
     // Require de la vista registro
@@ -13,18 +19,12 @@ class AuthController
     require 'app/views/auth/login.php';
   }
 
-  public function datos_usuario()
-  {
-    // Require de la vista ajustes
-    require 'app/views/auth/ajustes.php';
-  }
-
   public function registro_post()
   {
     // Comprobar que el usuario no exista
     if (Usuario::find($_POST['email'])) {
       // Si existe, redirigir a login
-      App::redirect("/auth/login");
+      App::redirect("/usuario/login");
     }
 
     $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -40,7 +40,7 @@ class AuthController
     $usuario->insert();
 
     // Redirigir a login
-    App::redirect("/auth/login");
+    App::redirect("/usuario/login");
   }
 
   public function login_post()
@@ -48,7 +48,7 @@ class AuthController
     $usuario = Usuario::find($_POST['email']);
     // Comprobar que el usuario exista
     if (!$usuario) {
-      App::redirect("/auth/registro");
+      App::redirect("/usuario/registro");
       return;
     }
 
@@ -58,7 +58,7 @@ class AuthController
       $usuario->password
     )) {
       // Si no es correcta, redirigir a login
-      App::redirect("/auth/login");
+      App::redirect("/usuario/login");
     }
 
     // Crear una sesión

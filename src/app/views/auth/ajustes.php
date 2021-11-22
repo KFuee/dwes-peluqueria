@@ -14,7 +14,7 @@
     <?php
     $breadItems = [
       '/home' => 'Home',
-      '/formulario/alta/servicio' => 'Datos del usuario',
+      '/usuario' => 'Datos del usuario',
     ];
 
     require('app/views/parts/breadcrumb.php');
