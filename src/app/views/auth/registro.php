@@ -11,6 +11,8 @@
   <?php require('app/views/parts/header.php'); ?>
 
   <div class="contenido">
+    <?php require('app/views/parts/breadcrumb.php'); ?>
+
     <h2 class="mb-4">Formulario - Registro</h2>
 
     <form action="/usuario/registro_post" method="post">

@@ -11,14 +11,7 @@
   <?php require('app/views/parts/header.php'); ?>
 
   <div class="contenido">
-    <?php
-    $breadItems = [
-      '/home' => 'Home',
-      '/usuario' => 'Datos del usuario',
-    ];
-
-    require('app/views/parts/breadcrumb.php');
-    ?>
+    <?php require('app/views/parts/breadcrumb.php'); ?>
 
     <h2 class="mb-4">Usuario - Datos</h2>
 

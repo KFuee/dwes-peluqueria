@@ -11,6 +11,8 @@
   <?php require('app/views/parts/header.php'); ?>
 
   <div class="contenido">
+    <?php require('app/views/parts/breadcrumb.php'); ?>
+
     <h2 class="mb-4">Formulario - Iniciar sesión</h2>
 
     <form action="/usuario/login_post" method="post">

@@ -11,7 +11,10 @@
   <?php require('app/views/parts/header.php'); ?>
 
   <div class="contenido">
+    <?php require('app/views/parts/breadcrumb.php'); ?>
+
     <h1>Bienvenid@ a la App de peluquería</h1>
+
     <?php
     // Comprueba si el usuario está logueado
     if ($usuario) {
