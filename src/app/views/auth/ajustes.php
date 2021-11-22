@@ -23,10 +23,11 @@
     <h2 class="mb-4">Usuario - Datos</h2>
 
     <?php
-    echo "ID: " . $usuario['id'] . "<br>";
-    echo "Nombre completo: " . $usuario['nombre'] . " "
+    echo "<b>ID</b>: " . $usuario['id'] . "<br>";
+    echo "<b>Nombre completo</b>: " . $usuario['nombre'] . " "
       . $usuario['apellidos'] . "<br>";
-    echo "Correo electrónico: " . $usuario['email'];
+    echo "<b>Correo electrónico</b>: " . $usuario['email'] . "<br>";
+    echo "<b>Rol</b>: " . $usuario['rol'];
     ?>
   </div>
 
