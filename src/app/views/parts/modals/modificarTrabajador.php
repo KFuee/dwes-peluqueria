@@ -3,27 +3,27 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modificarModalLabel">Modificar servicio</h5>
+        <h5 class="modal-title" id="modificarModalLabel">Modificar trabajador</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/tabla/modificar/servicio" method="post" id="form-datos">
-          <input type="hidden" name="id" id="id" />
+        <form action="/tabla/modificar/trabajador" method="post" id="form-datos">
+          <input type="hidden" name="dni" id="dni" />
           <div class="mb-3">
             <label for="nombre" class="col-form-label">Nombre:</label>
             <input type="text" class="form-control" name="nombre" id="nombre" />
           </div>
           <div class="mb-3">
-            <label for="precio" class="col-form-label">Precio:</label>
-            <input type="text" class="form-control" name="precio" id="precio" />
+            <label for="apellidos" class="col-form-label">Apellidos:</label>
+            <input type="text" class="form-control" name="apellidos" id="apellidos" />
           </div>
           <div class="mb-3">
-            <label for="duracion" class="col-form-label">Duración:</label>
-            <input type="text" class="form-control" name="duracion" id="duracion" />
+            <label for="email" class="col-form-label">Email:</label>
+            <input type="text" class="form-control" name="email" id="email" />
           </div>
           <div class="mb-3">
-            <label for="descripcion" class="col-form-label">Descripción:</label>
-            <textarea class="form-control" name="descripcion" id="descripcion"></textarea>
+            <label for="categoria" class="col-form-label">Categoría:</label>
+            <input type="text" class="form-control" name="categoria" id="categoria" />
           </div>
         </form>
       </div>
@@ -43,28 +43,27 @@
     const boton = event.relatedTarget;
 
     // Obtener los datos del servicio
-    const idServicio = boton.getAttribute("data-bs-id");
+    const dni = boton.getAttribute("data-bs-dni");
     const nombre = boton.getAttribute("data-bs-nombre");
-    const precio = boton.getAttribute("data-bs-precio");
-    const duracion = boton.getAttribute("data-bs-duracion");
+    const apellidos = boton.getAttribute("data-bs-apellidos");
+    const email = boton.getAttribute("data-bs-email");
     const descripcion = boton.getAttribute("data-bs-descripcion");
+    const categoria = boton.getAttribute("data-bs-categoria");
 
     // Seleccionamos los elementos del formulario
     const titulo = modificarModal.querySelector(".modal-title");
-    const idInput = modificarModal.querySelector(".modal-body #id");
+    const dniInput = modificarModal.querySelector(".modal-body #dni");
     const nombreInput = modificarModal.querySelector(".modal-body #nombre");
-    const precioInput = modificarModal.querySelector(".modal-body #precio");
-    const duracionInput = modificarModal.querySelector(".modal-body #duracion");
-    const descripcionTextarea = modificarModal.querySelector(
-      ".modal-body #descripcion"
-    );
+    const apellidosInput = modificarModal.querySelector(".modal-body #apellidos");
+    const emailInput = modificarModal.querySelector(".modal-body #email");
+    const categoriaInput = modificarModal.querySelector(".modal-body #categoria");
 
     // Asignar valores a los inputs
-    titulo.textContent = `Modificar servicio: ${idServicio}`;
-    idInput.value = idServicio;
+    titulo.textContent = `Modificar trabajador: ${nombre} ${apellidos}`;
+    dniInput.value = dni;
     nombreInput.value = nombre;
-    precioInput.value = precio;
-    duracionInput.value = duracion;
-    descripcionTextarea.value = descripcion;
+    apellidosInput.value = apellidos;
+    emailInput.value = email;
+    categoriaInput.value = categoria;
   });
 </script>

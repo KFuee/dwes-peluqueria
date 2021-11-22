@@ -63,7 +63,7 @@ $servicios = Servicio::all();
                     Modificar
                   </button>
                   <a class='btn btn-danger'
-                     href='/formulario/eliminar/servicio/$idServicio'>Eliminar
+                     href='/tabla/eliminar/servicio/$idServicio'>Eliminar
                   </a>
                 </td>";
 

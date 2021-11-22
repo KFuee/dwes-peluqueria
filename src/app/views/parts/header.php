@@ -34,6 +34,7 @@ if (isset($_SESSION['usuario']))
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href="/formulario/alta/servicio">Alta servicio</a></li>
+                <li><a class="dropdown-item" href="/formulario/alta/trabajador">Alta trabajador</a></li>
               </ul>
             </li>
 
@@ -44,6 +45,7 @@ if (isset($_SESSION['usuario']))
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li><a class="dropdown-item" href="/tabla/mostrar/servicios">Mostrar servicios</a></li>
+                <li><a class="dropdown-item" href="/tabla/mostrar/trabajadores">Mostrar trabajadores</a></li>
               </ul>
             </li>
         <?php }

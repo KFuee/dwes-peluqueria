@@ -24,18 +24,4 @@ class FormularioController
     // Redireccionar al usuario a la página de inicio
     App::redirect("/home");
   }
-
-  public function eliminar($atributos)
-  {
-    $tipo = ucwords($atributos[0]);
-    $id = $atributos[1];
-
-    $modelo = new $tipo();
-    $modelo->id = $id;
-
-    $modelo->delete();
-
-    if ($tipo === "Servicio")
-      App::redirect("/tabla/mostrar/servicios");
-  }
 }
