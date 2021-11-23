@@ -16,17 +16,23 @@
     <h2 class="mb-4">Formulario - Iniciar sesión</h2>
 
     <form action="/usuario/login_post" method="post">
-      <label for="email">Email: </label>
-      <input type="text" name="email" id="email"><br>
-
-      <br>
-
-      <label for="password">Contraseña: </label>
-      <input type="password" name="password" id="password"><br>
-
-      <br>
-
-      <input type="submit" value="Iniciar sesión">
+      <div class="form-group row mb-4">
+        <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" />
+        </div>
+      </div>
+      <div class="form-group row mb-4">
+        <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+        </div>
+      </div>
     </form>
   </div>
 

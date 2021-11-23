@@ -13,6 +13,12 @@ class ServicioController
     require 'app/views/formularios/servicio.php';
   }
 
+  public function pdf()
+  {
+    // Requiere de la vista de mostrar en pdf
+    require 'app/views/tablas/generarPdf.php';
+  }
+
   public function insertar()
   {
     $servicio = new Servicio();

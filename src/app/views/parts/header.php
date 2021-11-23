@@ -24,22 +24,22 @@ if (isset($_SESSION['usuario']))
           if ($usuario['rol'] !== 'cliente') { ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Formularios
+                Servicios
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/servicio">Mostrar servicios</a></li>
                 <li><a class="dropdown-item" href="/servicio/formulario">Alta servicio</a></li>
-                <li><a class="dropdown-item" href="/trabajador/formulario">Alta trabajador</a></li>
               </ul>
             </li>
 
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Tablas de datos
+                Trabajadores
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/servicio">Mostrar servicios</a></li>
                 <li><a class="dropdown-item" href="/trabajador">Mostrar trabajadores</a></li>
+                <li><a class="dropdown-item" href="/trabajador/formulario">Alta trabajador</a></li>
               </ul>
             </li>
         <?php }

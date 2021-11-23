@@ -16,32 +16,41 @@
     <h2 class="mb-4">Formulario - Dar de alta trabajador</h2>
 
     <form action="/trabajador/insertar" method="post">
-      <label for="dni">DNI: </label>
-      <input type="text" name="dni" id="dni"><br>
-
-      <br>
-
-      <label for="nombre">Nombre: </label>
-      <input type="text" name="nombre" id="nombre"><br>
-
-      <br>
-
-      <label for="apellidos">Apellidos: </label>
-      <input type="text" name="apellidos" id="apellidos"><br>
-
-      <br>
-
-      <label for="email">Email: </label>
-      <input type="text" name="email" id="email"><br>
-
-      <br>
-
-      <label for="categoria">Categoría: </label>
-      <input type="text" name="categoria" id="categoria"><br>
-
-      <br>
-
-      <input type="submit" value="Dar de alta">
+      <div class="form-group row mb-4">
+        <label for="dni" class="col-sm-2 col-form-label">DNI</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="dni" name="dni" />
+        </div>
+      </div>
+      <div class="form-group row mb-4">
+        <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="nombre" name="nombre" />
+        </div>
+      </div>
+      <div class="form-group row mb-4">
+        <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="apellidos" name="apellidos" />
+        </div>
+      </div>
+      <div class="form-group row mb-4">
+        <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="email" name="email" />
+        </div>
+      </div>
+      <div class="form-group row mb-4">
+        <label for="categoria" class="col-sm-2 col-form-label">Categoría</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="categoria" name="categoria" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary">Dar de alta</button>
+        </div>
+      </div>
     </form>
   </div>
 

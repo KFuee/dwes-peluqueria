@@ -17,10 +17,12 @@ $servicios = Servicio::all();
   <div class="contenido">
     <?php require('app/views/parts/breadcrumb.php'); ?>
 
+    <a class="btn btn-primary mb-4" href="/servicio/pdf" target="_blank">Generar PDF</a>
+
     <h2 class="mb-4">Listado de servicios:</h2>
 
     <div class="table-responsive">
-      <table class="table">
+      <table class="table" id="tabla">
         <tr>
           <th>#</th>
           <th>Nombre</th>
@@ -73,6 +75,12 @@ $servicios = Servicio::all();
   <!-- Modals -->
   <?php require('app/views/parts/modals/modificarServicio.php'); ?>
 
+  <script>
+    const htmlPdf = document.getElementById('html-pdf');
+    const tabla = document.getElementById('tabla');
+
+    htmlPdf.value = tabla.outerHTML;
+  </script>
   <?php require("app/views/parts/scripts.php") ?>
 </body>
 
