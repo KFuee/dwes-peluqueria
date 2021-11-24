@@ -41,27 +41,25 @@ $servicios = Servicio::all();
             $duracion = $servicio->duracion;
 
             echo "<tr>";
-
             echo "<td>" . ($i + 1) . "</td>";
             echo "<td>" . $servicio->nombre . "</td>";
             echo "<td>" . $precio . "</td>";
             echo "<td>" . $duracion . " min</td>";
             echo "<td>
-                  <button type='button' class='btn btn-primary'
-                   data-bs-toggle='modal'
-                   data-bs-target='#modificarModal'
-                   data-bs-id='$idServicio'
-                   data-bs-nombre='$nombre'
-                   data-bs-precio='$precio'
-                   data-bs-duracion='$duracion'
-                   data-bs-descripcion='$servicio->descripcion'>
-                    Modificar
-                  </button>
-                  <a class='btn btn-danger'
-                     href='/servicio/eliminar/$idServicio'>Eliminar
-                  </a>
-                </td>";
-
+                    <button type='button' class='btn btn-primary'
+                            data-bs-toggle='modal'
+                            data-bs-target='#modificarModal'
+                            data-bs-id='$idServicio'
+                            data-bs-nombre='$nombre'
+                            data-bs-precio='$precio'
+                            data-bs-duracion='$duracion'
+                            data-bs-descripcion='$servicio->descripcion'>
+                      Modificar
+                    </button>
+                    <a class='btn btn-danger'
+                       href='/servicio/eliminar/$idServicio'>Eliminar
+                    </a>
+                  </td>";
             echo "</tr>";
           }
         } else {
@@ -75,12 +73,6 @@ $servicios = Servicio::all();
   <!-- Modals -->
   <?php require('app/views/parts/modals/modificarServicio.php'); ?>
 
-  <script>
-    const htmlPdf = document.getElementById('html-pdf');
-    const tabla = document.getElementById('tabla');
-
-    htmlPdf.value = tabla.outerHTML;
-  </script>
   <?php require("app/views/parts/scripts.php") ?>
 </body>
 

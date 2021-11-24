@@ -17,6 +17,8 @@ $trabajadores = Trabajador::all();
   <div class="contenido">
     <?php require('app/views/parts/breadcrumb.php'); ?>
 
+    <a class="btn btn-primary mb-4" href="/trabajador/pdf" target="_blank">Generar PDF</a>
+
     <h2 class="mb-4">Listado de trabajadores:</h2>
 
     <div class="table-responsive">
@@ -41,28 +43,26 @@ $trabajadores = Trabajador::all();
             $categoria = $trabajador->categoria;
 
             echo "<tr>";
-
             echo "<td>" . $dni . "</td>";
             echo "<td>" . $nombre . "</td>";
             echo "<td>" . $apellidos . "</td>";
             echo "<td>" . $email . "</td>";
             echo "<td>" . $categoria . "</td>";
             echo "<td>
-                  <button type='button' class='btn btn-primary'
-                   data-bs-toggle='modal'
-                   data-bs-target='#modificarModal'
-                   data-bs-dni='$dni'
-                   data-bs-nombre='$nombre'
-                   data-bs-apellidos='$apellidos'
-                   data-bs-email='$email'
-                   data-bs-categoria='$categoria'>
-                    Modificar
-                  </button>
-                  <a class='btn btn-danger'
+                    <button type='button' class='btn btn-primary'
+                            data-bs-toggle='modal'
+                            data-bs-target='#modificarModal'
+                            data-bs-dni='$dni'
+                            data-bs-nombre='$nombre'
+                            data-bs-apellidos='$apellidos'
+                            data-bs-email='$email'
+                            data-bs-categoria='$categoria'>
+                      Modificar
+                    </button>
+                    <a class='btn btn-danger'
                      href='/trabajador/eliminar/$dni'>Eliminar
-                  </a>
-                </td>";
-
+                    </a>
+                  </td>";
             echo "</tr>";
           }
         } else {

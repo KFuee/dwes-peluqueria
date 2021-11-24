@@ -1,4 +1,7 @@
 <?php
+
+use Dompdf\Dompdf;
+
 class ServicioController
 {
   public function index()
@@ -16,7 +19,16 @@ class ServicioController
   public function pdf()
   {
     // Requiere de la vista de mostrar en pdf
-    require 'app/views/tablas/generarPdf.php';
+    ob_start();
+    $servicios = Servicio::all();
+    require 'app/components/servicios/pdf.php';
+    $html = ob_get_clean();
+
+    $dompdf = new Dompdf();
+    $dompdf->setPaper('A4', 'landscape');
+    $dompdf->loadHtml($html);
+    $dompdf->render();
+    $dompdf->stream('servicios.pdf', array('Attachment' => 0));
   }
 
   public function insertar()

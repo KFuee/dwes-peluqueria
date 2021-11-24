@@ -1,4 +1,7 @@
 <?php
+
+use Dompdf\Dompdf;
+
 class TrabajadorController
 {
   public function index()
@@ -11,6 +14,21 @@ class TrabajadorController
   {
     //Require de la vista del formulario
     require 'app/views/formularios/trabajador.php';
+  }
+
+  public function pdf()
+  {
+    // Requiere de la vista de mostrar en pdf
+    ob_start();
+    $trabajadores = Trabajador::all();
+    require 'app/components/trabajadores/pdf.php';
+    $html = ob_get_clean();
+
+    $dompdf = new Dompdf();
+    $dompdf->setPaper('A4', 'landscape');
+    $dompdf->loadHtml($html);
+    $dompdf->render();
+    $dompdf->stream('trabajadores.pdf', array('Attachment' => 0));
   }
 
   public function insertar()
