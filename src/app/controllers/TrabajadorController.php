@@ -40,6 +40,15 @@ class TrabajadorController
 
     $trabajador->insert();
 
+    // Inserta los servicios que realiza el trabajador
+    foreach ($_POST['servicios'] as $servicio) {
+      $servicioTrabajador = new ServicioTrabajador();
+      $servicioTrabajador->idServicio = $servicio;
+      $servicioTrabajador->dniTrabajador = $_POST['dni'];
+
+      $servicioTrabajador->insert();
+    }
+
     // Redireccionar al usuario a la lista de trabajadores
     App::redirect("/trabajador");
   }

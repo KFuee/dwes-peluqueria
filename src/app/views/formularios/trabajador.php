@@ -1,5 +1,9 @@
+<?php
+$servicios = Servicio::all();
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <?php require('app/views/parts/head.php'); ?>
@@ -44,6 +48,18 @@
         <label for="categoria" class="col-sm-2 col-form-label">Categoría</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="categoria" name="categoria" />
+        </div>
+      </div>
+      <div class="form-group row mb-4">
+        <label for="servicios" class="col-sm-2 col-form-label">Servicios</label>
+        <div class="col-sm-10">
+          <select multiple class="form-control" id="servicios" name="servicios[]">
+            <?php
+            foreach ($servicios as $servicio) {
+              echo '<option value="' . $servicio->id . '">' . $servicio->nombre . '</option>';
+            }
+            ?>
+          </select>
         </div>
       </div>
       <div class="form-group row">
