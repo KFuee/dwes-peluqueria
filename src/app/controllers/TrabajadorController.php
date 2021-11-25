@@ -1,12 +1,18 @@
 <?php
 
+namespace Peluqueria\App\Controllers;
+
+use Peluqueria\Core\App;
+use Peluqueria\App\Models\Trabajador;
+use Peluqueria\App\Models\ServicioTrabajador;
+
 use Dompdf\Dompdf;
 
 class TrabajadorController
 {
   public function index()
   {
-    // Requiere de la vista de mostrar
+    // Requiere de la vista mostrar
     require 'app/views/tablas/trabajadores.php';
   }
 

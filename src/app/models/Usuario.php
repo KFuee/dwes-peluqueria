@@ -1,5 +1,10 @@
 <?php
-require_once 'core/Database.php';
+
+namespace Peluqueria\App\Models;
+
+use Peluqueria\Core\Database;
+
+use PDO;
 
 class Usuario
 {
@@ -15,7 +20,7 @@ class Usuario
 
     $stmt = $db->query($sql);
 
-    $usuarios = $stmt->fetchAll(PDO::FETCH_CLASS, User::class);
+    $usuarios = $stmt->fetchAll(PDO::FETCH_CLASS, Usuario::class);
 
     return $usuarios;
   }
@@ -29,7 +34,7 @@ class Usuario
     $stmt->bindValue(":email", $email);
     $stmt->execute();
 
-    $usuario = $stmt->fetchObject("Usuario");
+    $usuario = $stmt->fetchObject(Usuario::class);
 
     return $usuario;
   }

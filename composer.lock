@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "dompdf/dompdf",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "aa594c1cdbcdab04977fdd0fff669a017fb50ef4"
+                "reference": "de4aad040737a89fae2129cdeb0f79c45513128d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/aa594c1cdbcdab04977fdd0fff669a017fb50ef4",
-                "reference": "aa594c1cdbcdab04977fdd0fff669a017fb50ef4",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/de4aad040737a89fae2129cdeb0f79c45513128d",
+                "reference": "de4aad040737a89fae2129cdeb0f79c45513128d",
                 "shasum": ""
             },
             "require": {
@@ -69,9 +69,9 @@
             "homepage": "https://github.com/dompdf/dompdf",
             "support": {
                 "issues": "https://github.com/dompdf/dompdf/issues",
-                "source": "https://github.com/dompdf/dompdf/tree/v1.1.0"
+                "source": "https://github.com/dompdf/dompdf/tree/v1.1.1"
             },
-            "time": "2021-11-16T18:39:01+00:00"
+            "time": "2021-11-24T00:45:04+00:00"
         },
         {
             "name": "phenx/php-font-lib",
@@ -212,16 +212,16 @@
     "packages-dev": [
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v200",
+            "version": "v201",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "ffa4d0e714439d6f54f9608a0aa16674e82ed0a1"
+                "reference": "aa5b19de5c45a32af27c87d655f5229b155fce25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/ffa4d0e714439d6f54f9608a0aa16674e82ed0a1",
-                "reference": "ffa4d0e714439d6f54f9608a0aa16674e82ed0a1",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/aa5b19de5c45a32af27c87d655f5229b155fce25",
+                "reference": "aa5b19de5c45a32af27c87d655f5229b155fce25",
                 "shasum": ""
             },
             "bin": [
@@ -251,9 +251,9 @@
             ],
             "support": {
                 "issues": "https://github.com/heroku/heroku-buildpack-php/issues",
-                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v200"
+                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v201"
             },
-            "time": "2021-10-28T22:02:01+00:00"
+            "time": "2021-11-18T18:47:54+00:00"
         }
     ],
     "aliases": [],

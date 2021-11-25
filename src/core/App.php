@@ -1,23 +1,16 @@
 <?php
+
+namespace Peluqueria\Core;
+
 class App
 {
   public function __construct()
   {
-    $this->loadModels();
     // Comprobar si la sesión está iniciada
     if (session_status() == PHP_SESSION_NONE) session_start();
 
     // Cargar el controlador y la acción introducida
     $this->run();
-  }
-
-  // Cargar modelos antes de iniciar la sesión para evitar errores
-  public function loadModels()
-  {
-    $models = glob('app/models/*.php');
-    foreach ($models as $model) {
-      require_once $model;
-    }
   }
 
   public function run()
@@ -43,15 +36,8 @@ class App
       $metodo = 'index';
     }
 
-    // Importa el controlador
-    $archivoControlador = 'app/controllers/' . $nombreControlador . '.php';
-    if (file_exists($archivoControlador)) {
-      require_once $archivoControlador;
-    } else {
-      $this->errorNotFound('archivo');
-    }
-
     // Instancia el controlador
+    $nombreControlador = '\\Peluqueria\\App\\Controllers\\' . $nombreControlador;
     $controladorObjeto = new $nombreControlador();
     if (method_exists($controladorObjeto, $metodo)) {
       $controladorObjeto->$metodo($argumentos);

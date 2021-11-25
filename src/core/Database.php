@@ -1,4 +1,9 @@
 <?php
+
+namespace Peluqueria\Core;
+
+use PDO;
+
 class Database
 {
   private $uri;
@@ -29,7 +34,7 @@ class Database
     try {
       $this->conn = new PDO($this->uri, $this->username, $this->password);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $exception) {
+    } catch (\PDOException $exception) {
       echo "Ha ocurrido un error conectando con la base de datos: "
         . $exception->getMessage();
     }

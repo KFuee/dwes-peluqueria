@@ -17,7 +17,7 @@ if (isset($_SESSION['usuario']))
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" aria-current="page">Pedir cita</a>
+          <a class="nav-link" aria-current="page" href="/cita">Pedir cita</a>
         </li>
 
         <?php if ($usuario) {

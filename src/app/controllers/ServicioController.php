@@ -1,12 +1,17 @@
 <?php
 
+namespace Peluqueria\App\Controllers;
+
+use Peluqueria\Core\App;
+use Peluqueria\App\Models\Servicio;
+
 use Dompdf\Dompdf;
 
 class ServicioController
 {
   public function index()
   {
-    // Requiere de la vista de mostrar
+    // Requiere de la vista mostrar
     require 'app/views/tablas/servicios.php';
   }
 

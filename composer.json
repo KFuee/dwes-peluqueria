@@ -1,4 +1,14 @@
 {
+  "autoload": {
+    "psr-4": {
+      "Peluqueria\\Core": "html/core",
+      "Peluqueria\\App\\Controllers": "html/app/controllers",
+      "Peluqueria\\App\\Models": "html/app/models"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
   },

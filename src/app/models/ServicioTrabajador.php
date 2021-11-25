@@ -1,4 +1,11 @@
 <?php
+
+namespace Peluqueria\App\Models;
+
+use Peluqueria\Core\Database;
+
+use PDO;
+
 class ServicioTrabajador
 {
   public function __construct()
@@ -27,7 +34,7 @@ class ServicioTrabajador
     $stmt->bindValue(":id_servicio", $id);
     $stmt->execute();
 
-    $trabajadores = $stmt->fetchObject("ServicioTrabajador");
+    $trabajadores = $stmt->fetchObject(ServicioTrabajador::class);
 
     return $trabajadores;
   }

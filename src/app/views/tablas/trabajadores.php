@@ -1,4 +1,7 @@
 <?php
+
+use Peluqueria\App\Models\Trabajador;
+
 $trabajadores = Trabajador::all();
 ?>
 

@@ -1,4 +1,10 @@
 <?php
+
+namespace Peluqueria\App\Controllers;
+
+use Peluqueria\Core\App;
+use Peluqueria\App\Models\Usuario;
+
 class UsuarioController
 {
   public function index()
