@@ -4,9 +4,9 @@ if (isset($_SESSION['usuario']))
   $usuario = $_SESSION['usuario'];
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <span class="navbar-brand">Peluquería</span>
+<nav class="navbar navbar-dark bg-dark shadow-sm navbar-expand-lg">
+  <div class="container">
+    <span class="navbar-brand"><i class="fas fa-cut me-3"></i>Peluquería</span>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -16,9 +16,22 @@ if (isset($_SESSION['usuario']))
           <a class="nav-link" aria-current="page" href="/home">Home</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/cita">Pedir cita</a>
-        </li>
+        <?php if ($usuario) {
+          if ($usuario['rol'] !== 'cliente') ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Citas
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="/cita">Mostrar citas</a></li>
+              <li><a class="dropdown-item" href="/cita/formulario">Pedir cita</a></li>
+            </ul>
+          </li>
+        <?php } else { ?>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/cita/formulario">Pedir cita</a>
+          </li>
+        <?php } ?>
 
         <?php if ($usuario) {
           if ($usuario['rol'] !== 'cliente') { ?>
