@@ -12,10 +12,11 @@ services:
     links:
       - database
     volumes:
-      - ${DOCUMENT_ROOT-./www}:/var/www/html
-      - ./vendor:/var/www/vendor
-      - ./composer.json:/var/www/composer.json
-      - ./composer.lock:/var/www/composer.lock
+      - ./src:/var/www/html/src
+      - ./public:/var/www/html/public
+      - ./vendor:/var/www/html/vendor
+      - ./composer.json:/var/www/html/composer.json
+      - ./composer.lock:/var/www/html/composer.lock
       - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
       - ${VHOSTS_DIR-./config/vhosts}:/etc/apache2/sites-enabled
       - ${LOG_DIR-./logs/apache2}:/var/log/apache2

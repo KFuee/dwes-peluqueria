@@ -1,9 +1,9 @@
 {
   "autoload": {
     "psr-4": {
-      "Peluqueria\\Core": "html/core",
-      "Peluqueria\\App\\Controllers": "html/app/controllers",
-      "Peluqueria\\App\\Models": "html/app/models"
+      "Peluqueria\\Core\\": "src/core",
+      "Peluqueria\\App\\Controllers\\": "src/controllers",
+      "Peluqueria\\App\\Models\\": "src/models"
     }
   },
   "config": {
