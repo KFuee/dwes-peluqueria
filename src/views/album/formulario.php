@@ -23,7 +23,7 @@ $servicios = Servicio::all();
 
       <h2 class="mb-4">Formulario - Subir imagen</h2>
 
-      <form action="/album/insertar" method="post">
+      <form action="/album/insertar" method="post" enctype="multipart/form-data">
         <div class="form-group row mb-4">
           <label for="fichero" class="col-sm-2 col-form-label">Fichero</label>
           <div class="col-sm-10">
@@ -32,7 +32,7 @@ $servicios = Servicio::all();
         </div>
 
         <div class="form-group row mb-4">
-          <label for="precio" class="col-sm-2 col-form-label">Servicio</label>
+          <label for="servicio" class="col-sm-2 col-form-label">Servicio</label>
           <div class="col-sm-10">
             <select class="form-control" id="servicio" name="servicio">
               <option value="">Selecciona un servicio</option>
@@ -59,8 +59,10 @@ $servicios = Servicio::all();
     </div>
   </div>
 
+  <!-- Footer -->
   <?php require(PATH . '/components/footer.php'); ?>
 
+  <!-- Scripts -->
   <?php require(PATH . '/components/scripts.php') ?>
 </body>
 

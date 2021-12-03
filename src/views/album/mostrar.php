@@ -1,3 +1,10 @@
+<?php
+
+use Peluqueria\App\Models\Fotografia;
+
+$fotografias = Fotografia::all();
+?>
+
 <!DOCTYPE html>
 <html lang="es" class="h-100">
 
@@ -7,18 +14,10 @@
   <title>Album de fotos</title>
 
   <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
+    .card-img-top {
+      width: 100%;
+      height: 15vw;
+      object-fit: cover;
     }
   </style>
 </head>
@@ -43,58 +42,26 @@
     <div class="album py-5">
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="../../../assets/img/prueba.jpeg" class="card-img-top" alt="Prueba">
+          <?php foreach ($fotografias as $fotografia) : ?>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img class="card-img-top" src="/subidas/<?= $fotografia->nombre_fichero ?>" alt="Imagen album">
 
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Pedir cita</button>
+                <div class="card-body">
+                  <p class="card-text"><?= $fotografia->descripcion ?></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="/subidas/<?= $fotografia->nombre_fichero ?>" target="_blank" class="btn btn-sm btn-outline-success">Ver</a>
+                      <a href="/cita/formulario" class="btn btn-sm btn-outline-primary">Pedir cita</a>
+                    </div>
                   </div>
-                  <small class="text-muted">Hace 10 mins</small>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="../../../assets/img/prueba.jpeg" class="card-img-top" alt="Prueba">
-
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Pedir cita</button>
-                  </div>
-                  <small class="text-muted">Hace 9 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="../../../assets/img/prueba.jpeg" class="card-img-top" alt="Prueba">
-
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Pedir cita</button>
-                  </div>
-                  <small class="text-muted">Hace 25 mins</small>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php endforeach; ?>
         </div>
       </div>
+    </div>
   </main>
 
   <?php require(PATH . '/components/footer.php'); ?>

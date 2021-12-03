@@ -41,14 +41,13 @@ class Fotografia
 
   public function insert()
   {
-    $sql = "INSERT INTO fotografias (nombre_fichero, id_servicio, descripcion, fecha_creacion)
-            VALUES (:nombre_fichero, :id_servicio, :descripcion, :fecha_creacion)";
+    $sql = "INSERT INTO fotografias (nombre_fichero, id_servicio, descripcion)
+            VALUES (:nombre_fichero, :id_servicio, :descripcion)";
 
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(":nombre_fichero", $this->nombre_fichero);
     $stmt->bindValue(":id_servicio", $this->id_servicio);
     $stmt->bindValue(":descripcion", $this->descripcion);
-    $stmt->bindValue(":fecha_creacion", $this->fecha_creacion);
 
     $stmt->execute();
   }
@@ -68,8 +67,7 @@ class Fotografia
     $sql = "UPDATE fotografias
             SET nombre_fichero = :nombre_fichero,
                 id_servicio = :id_servicio,
-                descripcion = :descripcion,
-                fecha_creacion = :fecha_creacion
+                descripcion = :descripcion
             WHERE id = :id";
 
     $stmt = $this->db->prepare($sql);
@@ -77,7 +75,6 @@ class Fotografia
     $stmt->bindValue(":nombre_fichero", $this->nombre_fichero);
     $stmt->bindValue(":id_servicio", $this->id_servicio);
     $stmt->bindValue(":descripcion", $this->descripcion);
-    $stmt->bindValue(":fecha_creacion", $this->fecha_creacion);
 
     $stmt->execute();
   }

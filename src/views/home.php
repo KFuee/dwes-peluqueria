@@ -27,8 +27,10 @@
     </div>
   </div>
 
+  <!-- Footer -->
   <?php require(PATH . '/components/footer.php'); ?>
 
+  <!-- Scripts -->
   <?php require(PATH . '/components/scripts.php') ?>
 </body>
 
