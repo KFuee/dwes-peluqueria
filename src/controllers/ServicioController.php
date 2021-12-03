@@ -5,8 +5,6 @@ namespace Peluqueria\App\Controllers;
 use Peluqueria\Core\App;
 use Peluqueria\App\Models\Servicio;
 
-use Dompdf\Dompdf;
-
 class ServicioController
 {
   public function index()
@@ -21,19 +19,11 @@ class ServicioController
     require PATH . '/views/servicios/formulario.php';
   }
 
-  public function pdf()
+  // Devuelve todos los servicios en JSON
+  public function data()
   {
-    // Requiere de la vista de mostrar en pdf
-    ob_start();
     $servicios = Servicio::all();
-    require PATH . '/components/servicios/pdf.php';
-    $html = ob_get_clean();
-
-    $dompdf = new Dompdf();
-    $dompdf->setPaper('A4', 'landscape');
-    $dompdf->loadHtml($html);
-    $dompdf->render();
-    $dompdf->stream('servicios.pdf', array('Attachment' => 0));
+    echo json_encode($servicios);
   }
 
   public function insertar()
@@ -63,13 +53,14 @@ class ServicioController
     App::redirect("/servicio");
   }
 
-  public function eliminar($atributos)
+  public function eliminar()
   {
     $servicio = new Servicio();
-    $servicio->id = $atributos[0];
-    $servicio->delete();
+    $servicio->ids = $_POST['ids'];
+    $test = $servicio->delete();
 
-    // Redireccionar al usuario a la lista de servicios
-    App::redirect("/servicio");
+    // Response OK
+    header('Content-Type: application/json');
+    echo json_encode(array('status' => 'OK', 'test' => $test));
   }
 }

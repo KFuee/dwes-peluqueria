@@ -1,9 +1,9 @@
 <!-- Modal modificar servicio -->
-<div class="modal fade" id="modificarModal" tabindex="-1" aria-labelledby="modificarModalLabel" aria-hidden="true">
+<div class="modal fade" id="modificarServicio" tabindex="-1" aria-labelledby="modificarServicioLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modificarModalLabel">Modificar servicio</h5>
+        <h5 class="modal-title" id="modificarServicioLabel">Modificar servicio</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -42,35 +42,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  const modificarModal = document.getElementById("modificarModal");
-  modificarModal.addEventListener("show.bs.modal", function(event) {
-    const boton = event.relatedTarget;
-
-    // Obtener los datos del servicio
-    const idServicio = boton.getAttribute("data-bs-id");
-    const nombre = boton.getAttribute("data-bs-nombre");
-    const precio = boton.getAttribute("data-bs-precio");
-    const duracion = boton.getAttribute("data-bs-duracion");
-    const descripcion = boton.getAttribute("data-bs-descripcion");
-
-    // Seleccionamos los elementos del formulario
-    const titulo = modificarModal.querySelector(".modal-title");
-    const idInput = modificarModal.querySelector(".modal-body #id");
-    const nombreInput = modificarModal.querySelector(".modal-body #nombre");
-    const precioInput = modificarModal.querySelector(".modal-body #precio");
-    const duracionInput = modificarModal.querySelector(".modal-body #duracion");
-    const descripcionTextarea = modificarModal.querySelector(
-      ".modal-body #descripcion"
-    );
-
-    // Asignar valores a los inputs
-    titulo.textContent = `Modificar servicio: ${idServicio}`;
-    idInput.value = idServicio;
-    nombreInput.value = nombre;
-    precioInput.value = precio;
-    duracionInput.value = duracion;
-    descripcionTextarea.value = descripcion;
-  });
-</script>
