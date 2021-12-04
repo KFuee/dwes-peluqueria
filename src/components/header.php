@@ -79,7 +79,7 @@ if (isset($_SESSION['usuario']))
       <form class="d-flex">
         <?php
         if ($usuario) {
-          echo "<a class='btn btn-outline-success me-2' href='/usuario'>Ajustes</a>";
+          echo "<a class='btn btn-outline-success me-2' href='/usuario'>Usuario</a>";
           echo "<a class='btn btn-outline-danger' href='/usuario/logout'>Cerrar sesión</a>";
         } else {
           echo "<a class='btn btn-outline-primary me-2' href='/usuario/registro'>Registrarse</a>";
