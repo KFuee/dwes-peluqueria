@@ -4,6 +4,7 @@ namespace Peluqueria\App\Controllers;
 
 use Peluqueria\Core\App;
 use Peluqueria\App\Models\Servicio;
+use Peluqueria\App\Models\Fotografia;
 
 class ServicioController
 {
@@ -58,6 +59,11 @@ class ServicioController
     $servicio = new Servicio();
     $servicio->ids = $_POST['ids'];
     $test = $servicio->delete();
+
+    // Eliminar todas las fotografías asociadas al servicio
+    $fotografias = new Fotografia();
+    $fotografias->ids = $_POST['ids'];
+    $fotografias->deleteFotosServicio();
 
     // Response OK
     header('Content-Type: application/json');

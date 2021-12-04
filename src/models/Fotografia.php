@@ -61,6 +61,17 @@ class Fotografia
     $stmt->execute();
   }
 
+  public function deleteFotosServicio()
+  {
+    $ids = implode(',', array_map(array($this->db, "quote"), $this->ids));
+
+    $sql = "DELETE FROM fotografias WHERE id_servicio IN ($ids)";
+
+    $stmt = $this->db->prepare($sql);
+
+    $stmt->execute();
+  }
+
   public function save()
   {
     $sql = "UPDATE fotografias
