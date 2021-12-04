@@ -24,12 +24,10 @@ class AlbumController
     $nombreFichero = $_FILES['fichero']['name'];
 
     $idServicio = $_POST['servicio'];
-    $descripcion = $_POST['descripcion'];
 
     $fotografia = new Fotografia();
     $fotografia->nombre_fichero = $nombreFichero;
     $fotografia->id_servicio = $idServicio;
-    $fotografia->descripcion = $descripcion;
 
     $fotografia->insert();
 
@@ -37,6 +35,18 @@ class AlbumController
     $rutaFichero = $_FILES['fichero']['tmp_name'];
     $destinoFichero = 'subidas/' . $nombreFichero;
     move_uploaded_file($rutaFichero, $destinoFichero);
+
+    // Redireccionar al usuario al album
+    App::redirect('/album');
+  }
+
+  public function eliminar($arguments)
+  {
+    $idFotografia = $arguments[0];
+
+    $fotografia = new Fotografia();
+    $fotografia->id = $idFotografia;
+    $fotografia->delete();
 
     // Redireccionar al usuario al album
     App::redirect('/album');

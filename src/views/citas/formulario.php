@@ -29,9 +29,11 @@ $servicios = Servicio::all();
           <div class="col-sm-10">
             <select class="form-control" id="servicio" name="servicio">
               <?php foreach ($servicios as $servicio) : ?>
-                <option value="<?= $servicio->id ?>">
-                  <?= "$servicio->nombre - Duración $servicio->duracion minutos" ?>
-                </option>
+                <?php if (isset($_GET['servicio']) && $_GET['servicio'] == $servicio->id) : ?>
+                  <option value="<?= $servicio->id ?>" selected><?= "$servicio->nombre - Duración $servicio->duracion minutos" ?></option>
+                <?php else : ?>
+                  <option value="<?= $servicio->id ?>"><?= "$servicio->nombre - Duración $servicio->duracion minutos" ?></option>
+                <?php endif; ?>
               <?php endforeach; ?>
             </select>
           </div>
@@ -94,16 +96,18 @@ $servicios = Servicio::all();
     </div>
   </div>
 
+  <!-- Footer -->
   <?php require(PATH . '/components/footer.php'); ?>
 
+  <!-- Scripts -->
   <?php require(PATH . '/components/scripts.php') ?>
-
   <script>
     <?php if (isset($_SESSION["usuario"])) { ?>
       const usuario = <?= json_encode($_SESSION["usuario"]) ?>;
     <?php } ?>
   </script>
-  <script src="../../assets/js/citas.js"></script>
+  <script src="../../assets/js/citas/formulario.js"></script>
+  <!-- Fin - Scripts -->
 </body>
 
 </html>

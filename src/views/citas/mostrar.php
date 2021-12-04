@@ -86,8 +86,10 @@ $citas = Cita::all();
   <!-- Modals -->
   <?php require(PATH . '/components/citas/mostrarCita.php'); ?>
 
+  <!-- Footer -->
   <?php require(PATH . '/components/footer.php'); ?>
 
+  <!-- Scripts -->
   <?php require(PATH . '/components/scripts.php') ?>
 </body>
 

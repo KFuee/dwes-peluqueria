@@ -112,21 +112,7 @@ class CitaController
 
     // Obtener array de las horas ocupadas
     $horasOcupadas = array();
-    foreach ($citas as $cita) {
-      foreach ($horas as $clave => $hora) {
-        if ($cita->hora == $hora) {
-          $nModulos = $cita->duracion / 15;
-          $nModulosReverse = $servicio->duracion / 15;
-
-          if ($nModulosReverse > 1) {
-            $hEliminadas = array_splice($horas, $clave - $nModulosReverse + 1, $nModulosReverse - 1 + $nModulos);
-          } else {
-            $hEliminadas = array_splice($horas, $clave, $nModulos);
-          }
-
-          array_push($horasOcupadas, $hEliminadas);
-        }
-      }
+    foreach ($citas as $clave => $cita) {
     }
 
     $horasOcupadas = array_merge(...$horasOcupadas);

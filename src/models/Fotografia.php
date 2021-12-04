@@ -41,13 +41,12 @@ class Fotografia
 
   public function insert()
   {
-    $sql = "INSERT INTO fotografias (nombre_fichero, id_servicio, descripcion)
-            VALUES (:nombre_fichero, :id_servicio, :descripcion)";
+    $sql = "INSERT INTO fotografias (nombre_fichero, id_servicio)
+            VALUES (:nombre_fichero, :id_servicio)";
 
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(":nombre_fichero", $this->nombre_fichero);
     $stmt->bindValue(":id_servicio", $this->id_servicio);
-    $stmt->bindValue(":descripcion", $this->descripcion);
 
     $stmt->execute();
   }
@@ -67,14 +66,12 @@ class Fotografia
     $sql = "UPDATE fotografias
             SET nombre_fichero = :nombre_fichero,
                 id_servicio = :id_servicio,
-                descripcion = :descripcion
             WHERE id = :id";
 
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(":id", $this->id);
     $stmt->bindValue(":nombre_fichero", $this->nombre_fichero);
     $stmt->bindValue(":id_servicio", $this->id_servicio);
-    $stmt->bindValue(":descripcion", $this->descripcion);
 
     $stmt->execute();
   }

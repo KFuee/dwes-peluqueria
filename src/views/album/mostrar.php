@@ -1,6 +1,7 @@
 <?php
 
 use Peluqueria\App\Models\Fotografia;
+use Peluqueria\App\Models\Servicio;
 
 $fotografias = Fotografia::all();
 ?>
@@ -42,30 +43,55 @@ $fotografias = Fotografia::all();
     <div class="album py-5">
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <?php foreach ($fotografias as $fotografia) : ?>
-            <div class="col">
-              <div class="card shadow-sm">
-                <img class="card-img-top" src="/subidas/<?= $fotografia->nombre_fichero ?>" alt="Imagen album">
+          <?php if (!empty($fotografias)) : ?>
+            <?php foreach ($fotografias as $fotografia) : ?>
+              <?php $servicio = Servicio::find($fotografia->id_servicio); ?>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <img class="card-img-top" src="/subidas/<?= $fotografia->nombre_fichero ?>" alt="Imagen album">
 
-                <div class="card-body">
-                  <p class="card-text"><?= $fotografia->descripcion ?></p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a href="/subidas/<?= $fotografia->nombre_fichero ?>" target="_blank" class="btn btn-sm btn-outline-success">Ver</a>
-                      <a href="/cita/formulario" class="btn btn-sm btn-outline-primary">Pedir cita</a>
+                  <div class="card-body">
+                    <p class="card-text"><?= "<b>Servicio</b>: " . $servicio->nombre . "<br>" ?></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="/subidas/<?= $fotografia->nombre_fichero ?>" target="_blank" class="btn btn-sm btn-outline-success">Ver</a>
+                        <a href="/cita/formulario?servicio=<?= $fotografia->id_servicio ?>" class="btn btn-sm btn-outline-primary">Pedir cita</a>
+                      </div>
+
+                      <!-- Botón eliminar -->
+                      <?php if (isset($_SESSION['usuario'])) : ?>
+                        <?php if ($usuario['rol'] !== 'cliente') : ?>
+                          <div class="btn-group">
+                            <a href="/album/eliminar/<?= $fotografia->id ?>" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                          </div>
+                        <?php endif; ?>
+                      <?php endif; ?>
                     </div>
                   </div>
                 </div>
               </div>
+            <?php endforeach; ?>
+          <?php else : ?>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <p class="card-text text-center">
+                    <i class="fas fa-database me-2" style="color: #dc3545;"></i>
+                    <b>No se han encontrado fotografías</b>
+                  </p>
+                </div>
+              </div>
             </div>
-          <?php endforeach; ?>
+          <?php endif; ?>
         </div>
       </div>
     </div>
   </main>
 
+  <!-- Footer -->
   <?php require(PATH . '/components/footer.php'); ?>
 
+  <!-- Scripts -->
   <?php require(PATH . '/components/scripts.php') ?>
 </body>
 
