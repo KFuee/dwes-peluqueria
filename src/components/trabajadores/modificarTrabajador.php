@@ -1,14 +1,17 @@
 <!-- Modal modificar servicio -->
-<div class="modal fade" id="modificarModal" tabindex="-1" aria-labelledby="modificarModalLabel" aria-hidden="true">
+<div class="modal fade" id="modificarTrabajador" tabindex="-1" aria-labelledby="modificarTrabajadorLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modificarModalLabel">Modificar trabajador</h5>
+        <h5 class="modal-title" id="modificarTrabajadorLabel">Modificar trabajador</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form action="/trabajador/modificar" method="post" id="form-datos">
-          <input type="hidden" name="dni" id="dni" />
+          <div class="mb-3">
+            <label for="dni" class="col-form-label">DNI:</label>
+            <input type="text" class="form-control" name="dni" id="dni" readonly>
+          </div>
 
           <div class="mb-3">
             <label for="nombre" class="col-form-label">Nombre:</label>
@@ -41,34 +44,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  const modificarModal = document.getElementById("modificarModal");
-  modificarModal.addEventListener("show.bs.modal", function(event) {
-    const boton = event.relatedTarget;
-
-    // Obtener los datos del servicio
-    const dni = boton.getAttribute("data-bs-dni");
-    const nombre = boton.getAttribute("data-bs-nombre");
-    const apellidos = boton.getAttribute("data-bs-apellidos");
-    const email = boton.getAttribute("data-bs-email");
-    const descripcion = boton.getAttribute("data-bs-descripcion");
-    const categoria = boton.getAttribute("data-bs-categoria");
-
-    // Seleccionamos los elementos del formulario
-    const titulo = modificarModal.querySelector(".modal-title");
-    const dniInput = modificarModal.querySelector(".modal-body #dni");
-    const nombreInput = modificarModal.querySelector(".modal-body #nombre");
-    const apellidosInput = modificarModal.querySelector(".modal-body #apellidos");
-    const emailInput = modificarModal.querySelector(".modal-body #email");
-    const categoriaInput = modificarModal.querySelector(".modal-body #categoria");
-
-    // Asignar valores a los inputs
-    titulo.textContent = `Modificar trabajador: ${nombre} ${apellidos}`;
-    dniInput.value = dni;
-    nombreInput.value = nombre;
-    apellidosInput.value = apellidos;
-    emailInput.value = email;
-    categoriaInput.value = categoria;
-  });
-</script>

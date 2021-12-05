@@ -56,10 +56,11 @@ class Trabajador
 
   public function delete()
   {
-    $sql = "DELETE FROM trabajadores WHERE dni = :dni";
+    $dnis = implode(',', array_map(array($this->db, "quote"), $this->dnis));
+
+    $sql = "DELETE FROM trabajadores WHERE dni IN ($dnis)";
 
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(":dni", $this->dni);
 
     $stmt->execute();
   }

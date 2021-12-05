@@ -6,8 +6,6 @@ use Peluqueria\Core\App;
 use Peluqueria\App\Models\Trabajador;
 use Peluqueria\App\Models\ServicioTrabajador;
 
-use Dompdf\Dompdf;
-
 class TrabajadorController
 {
   public function index()
@@ -22,19 +20,11 @@ class TrabajadorController
     require PATH . '/views/trabajadores/formulario.php';
   }
 
-  public function pdf()
+  // Devuelve todos los trabajadores en JSON
+  public function data()
   {
-    // Requiere de la vista de mostrar en pdf
-    ob_start();
     $trabajadores = Trabajador::all();
-    require PATH . '/components/trabajadores/pdf.php';
-    $html = ob_get_clean();
-
-    $dompdf = new Dompdf();
-    $dompdf->setPaper('A4', 'landscape');
-    $dompdf->loadHtml($html);
-    $dompdf->render();
-    $dompdf->stream('trabajadores.pdf', array('Attachment' => 0));
+    echo json_encode($trabajadores);
   }
 
   public function insertar()
@@ -72,13 +62,14 @@ class TrabajadorController
     App::redirect("/trabajador");
   }
 
-  public function eliminar($atributos)
+  public function eliminar()
   {
     $trabajador = new Trabajador();
-    $trabajador->dni = $atributos[0];
+    $trabajador->dnis = $_POST['dnis'];
     $trabajador->delete();
 
-    // Redireccionar al usuario a la lista de trabajadores
-    App::redirect("/trabajador");
+    // Response OK
+    header('Content-Type: application/json');
+    echo json_encode(array('status' => 'OK'));
   }
 }

@@ -18,7 +18,7 @@
 
       <div id="toolbar">
         <button id="eliminar" class="btn btn-danger" disabled>
-          <i class="fa fa-trash"></i> Eliminar
+          <i class="fa fa-trash me-2"></i>Eliminar
         </button>
       </div>
 

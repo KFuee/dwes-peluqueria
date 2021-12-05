@@ -67,6 +67,6 @@ class ServicioController
 
     // Response OK
     header('Content-Type: application/json');
-    echo json_encode(array('status' => 'OK', 'test' => $test));
+    echo json_encode(array('status' => 'OK'));
   }
 }

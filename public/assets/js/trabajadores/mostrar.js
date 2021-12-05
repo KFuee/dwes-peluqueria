@@ -1,11 +1,11 @@
-var $tabla = $("#servicios");
+var $tabla = $("#trabajadores");
 var $eliminar = $("#eliminar");
 
 var seleccionados = [];
 
 function getIdSelections() {
   return $.map($tabla.bootstrapTable("getSelections"), function (row) {
-    return row.id;
+    return row.dni;
   });
 }
 
@@ -30,7 +30,7 @@ function detallesFormatter(index, row) {
 
 function operateFormatter(value, row, index) {
   return [
-    '<button class="btn btn-primary btn-sm me-2" type="button" data-toggle="modal" data-target="#modificarServicio" data-id="' +
+    '<button class="btn btn-primary btn-sm me-2" type="button" data-toggle="modal" data-target="#modificarTrabajador" data-id="' +
       row.id +
       '">',
     '<i class="fa fa-pencil"></i>',
@@ -41,28 +41,30 @@ function operateFormatter(value, row, index) {
 
 window.operateEvents = {
   "click .btn-primary": function (e, value, row, index) {
-    $("#modificarServicio").modal("show");
-    $("#modificarServicio").find('input[name="id"]').val(row.id);
-    $("#modificarServicio").find('input[name="nombre"]').val(row.nombre);
-    $("#modificarServicio").find('input[name="precio"]').val(row.precio);
-    $("#modificarServicio").find('input[name="duracion"]').val(row.duracion);
-    $("#modificarServicio")
-      .find('textarea[name="descripcion"]')
-      .val(row.descripcion);
+    $("#modificarTrabajador").modal("show");
+    $("#modificarTrabajador").find('input[name="dni"]').val(row.dni);
+    $("#modificarTrabajador").find('input[name="nombre"]').val(row.nombre);
+    $("#modificarTrabajador")
+      .find('input[name="apellidos"]')
+      .val(row.apellidos);
+    $("#modificarTrabajador").find('input[name="email"]').val(row.email);
+    $("#modificarTrabajador")
+      .find('input[name="categoria"]')
+      .val(row.categoria);
   },
   "click .btn-danger": function (e, value, row, index) {
     // Ajax eliminar
     $.ajax({
-      url: "/servicio/eliminar",
+      url: "/trabajador/eliminar",
       type: "POST",
       data: {
-        ids: [row.id],
+        dnis: [row.dni],
       },
       success: function (res) {
         if (res.status == "OK") {
           $tabla.bootstrapTable("remove", {
-            field: "id",
-            values: [row.id],
+            field: "dni",
+            values: [row.dni],
           });
         }
       },
@@ -73,7 +75,7 @@ window.operateEvents = {
 function iniciarTabla() {
   $tabla.bootstrapTable("destroy").bootstrapTable({
     locale: "es-ES",
-    url: "/servicio/data",
+    url: "/trabajador/data",
     search: true,
     detailView: true,
     detailFormatter: detallesFormatter,
@@ -89,8 +91,8 @@ function iniciarTabla() {
         valign: "middle",
       },
       {
-        field: "id",
-        title: "ID",
+        field: "dni",
+        title: "DNI",
         align: "center",
       },
       {
@@ -99,18 +101,19 @@ function iniciarTabla() {
         align: "center",
       },
       {
-        field: "precio",
-        title: "Precio",
-        sortable: true,
+        field: "apellidos",
+        title: "Apellidos",
         align: "center",
-        formatter: precioFormatter,
       },
       {
-        field: "duracion",
-        title: "Duración",
-        sortable: true,
+        field: "email",
+        title: "Email",
         align: "center",
-        formatter: duracionFormatter,
+      },
+      {
+        field: "categoria",
+        title: "Categoría",
+        align: "center",
       },
       {
         field: "operate",
@@ -137,15 +140,15 @@ $tabla.on(
 
 $eliminar.click(function () {
   $.ajax({
-    url: "/servicio/eliminar",
+    url: "/trabajador/eliminar",
     type: "POST",
     data: {
-      ids: seleccionados,
+      dnis: seleccionados,
     },
     success: function (res) {
       if (res.status == "OK") {
         $tabla.bootstrapTable("remove", {
-          field: "id",
+          field: "dni",
           values: seleccionados,
         });
 
