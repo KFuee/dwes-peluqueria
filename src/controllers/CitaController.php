@@ -6,9 +6,6 @@ use Peluqueria\App\Models\ServicioTrabajador;
 use Peluqueria\App\Models\Trabajador;
 use Peluqueria\App\Models\Cita;
 use Peluqueria\App\Models\Servicio;
-use Peluqueria\Core\App;
-
-use Dompdf\Dompdf;
 
 class CitaController
 {
@@ -24,19 +21,11 @@ class CitaController
     require PATH . '/views/citas/formulario.php';
   }
 
-  public function pdf()
+  // Devuelve todos las citas en JSON
+  public function data()
   {
-    // Requiere de la vista de mostrar en pdf
-    ob_start();
     $citas = Cita::all();
-    require PATH . '/components/citas/pdf.php';
-    $html = ob_get_clean();
-
-    $dompdf = new Dompdf();
-    $dompdf->setPaper('A4', 'landscape');
-    $dompdf->loadHtml($html);
-    $dompdf->render();
-    $dompdf->stream('citas.pdf', array('Attachment' => 0));
+    echo json_encode($citas);
   }
 
   public function trabajadores()
@@ -141,16 +130,14 @@ class CitaController
     echo json_encode(array('status' => 'OK'));
   }
 
-  public function eliminar($atributos)
+  public function eliminar()
   {
-    $id = $atributos[0];
-
-
     $cita = new Cita();
-    $cita->id = $id;
+    $cita->ids = $_POST['ids'];
     $cita->delete();
 
-    // Redireccionar al usuario a la lista de citas
-    App::redirect("/cita");
+    // Response OK
+    header('Content-Type: application/json');
+    echo json_encode(array('status' => 'OK'));
   }
 }

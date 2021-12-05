@@ -58,7 +58,7 @@ class ServicioController
   {
     $servicio = new Servicio();
     $servicio->ids = $_POST['ids'];
-    $test = $servicio->delete();
+    $servicio->delete();
 
     // Eliminar todas las fotografías asociadas al servicio
     $fotografias = new Fotografia();

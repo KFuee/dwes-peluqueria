@@ -1,11 +1,11 @@
-var $tabla = $("#trabajadores");
+var $tabla = $("#citas");
 var $eliminar = $("#eliminar");
 
 var seleccionados = [];
 
 function getIdSelections() {
   return $.map($tabla.bootstrapTable("getSelections"), function (row) {
-    return row.dni;
+    return row.id;
   });
 }
 
@@ -22,41 +22,24 @@ function detallesFormatter(index, row) {
 
 function operateFormatter(value, row, index) {
   return [
-    '<button class="btn btn-primary btn-sm me-2" type="button" data-toggle="modal" data-target="#modificarTrabajador" data-id="' +
-      row.id +
-      '">',
-    '<i class="fa fa-pencil"></i>',
-    "</button>",
     '<button class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash"></i></button>',
   ].join("");
 }
 
 window.operateEvents = {
-  "click .btn-primary": function (e, value, row, index) {
-    $("#modificarTrabajador").modal("show");
-    $("#modificarTrabajador").find('input[name="dni"]').val(row.dni);
-    $("#modificarTrabajador").find('input[name="nombre"]').val(row.nombre);
-    $("#modificarTrabajador")
-      .find('input[name="apellidos"]')
-      .val(row.apellidos);
-    $("#modificarTrabajador").find('input[name="email"]').val(row.email);
-    $("#modificarTrabajador")
-      .find('input[name="categoria"]')
-      .val(row.categoria);
-  },
   "click .btn-danger": function (e, value, row, index) {
     // Ajax eliminar
     $.ajax({
-      url: "/trabajador/eliminar",
+      url: "/cita/eliminar",
       type: "POST",
       data: {
-        dnis: [row.dni],
+        ids: [row.id],
       },
       success: function (res) {
         if (res.status == "OK") {
           $tabla.bootstrapTable("remove", {
-            field: "dni",
-            values: [row.dni],
+            field: "id",
+            values: [row.id],
           });
         }
       },
@@ -67,7 +50,7 @@ window.operateEvents = {
 function iniciarTabla() {
   $tabla.bootstrapTable("destroy").bootstrapTable({
     locale: "es-ES",
-    url: "/trabajador/data",
+    url: "/cita/data",
     search: true,
     detailView: true,
     detailFormatter: detallesFormatter,
@@ -83,9 +66,31 @@ function iniciarTabla() {
         valign: "middle",
       },
       {
-        field: "dni",
-        title: "DNI",
+        field: "id",
+        title: "ID",
         align: "center",
+      },
+      {
+        field: "trabajador",
+        title: "Trabajador",
+        align: "center",
+      },
+      {
+        field: "servicio",
+        title: "Servicio",
+        align: "center",
+      },
+      {
+        field: "fecha",
+        title: "Fecha",
+        align: "center",
+        sortable: true,
+      },
+      {
+        field: "hora",
+        title: "Hora",
+        align: "center",
+        sortable: true,
       },
       {
         field: "nombre",
@@ -101,11 +106,13 @@ function iniciarTabla() {
         field: "email",
         title: "Email",
         align: "center",
+        visible: false,
       },
       {
-        field: "categoria",
-        title: "Categoría",
+        field: "observaciones",
+        title: "Observaciones",
         align: "center",
+        visible: false,
       },
       {
         field: "operate",
@@ -132,15 +139,15 @@ $tabla.on(
 
 $eliminar.click(function () {
   $.ajax({
-    url: "/trabajador/eliminar",
+    url: "/cita/eliminar",
     type: "POST",
     data: {
-      dnis: seleccionados,
+      ids: seleccionados,
     },
     success: function (res) {
       if (res.status == "OK") {
         $tabla.bootstrapTable("remove", {
-          field: "dni",
+          field: "id",
           values: seleccionados,
         });
 

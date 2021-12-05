@@ -94,10 +94,11 @@ class Cita
 
   public function delete()
   {
-    $sql = "DELETE FROM citas WHERE id = :id";
+    $ids = implode(',', array_map(array($this->db, "quote"), $this->ids));
+
+    $sql = "DELETE FROM citas WHERE id IN ($ids)";
 
     $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(":id", $this->id);
 
     $stmt->execute();
   }
