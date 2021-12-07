@@ -42,10 +42,10 @@ class Cita
   public static function findCitasSemanaTrabajador($dniTrabajador)
   {
     $db = Database::getConnection();
-    $sql = "SELECT c.fecha , c.hora, s.duracion
-            FROM citas c, servicios s
-            WHERE c.servicio = s.id AND c.trabajador = :trabajador
-            AND str_to_date(c.fecha, '%d-%m-%Y') BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY";
+    $sql = "SELECT *
+            FROM citas
+            WHERE trabajador = :trabajador
+            AND str_to_date(fecha, '%d-%m-%Y') BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY";
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(":trabajador", $dniTrabajador);
@@ -59,10 +59,10 @@ class Cita
   public static function findCitasDiaTrabajador($dniTrabajador, $fecha)
   {
     $db = Database::getConnection();
-    $sql = "SELECT c.fecha , c.hora, s.duracion
-            FROM citas c, servicios s
-            WHERE c.servicio = s.id AND c.trabajador = :trabajador
-            AND c.fecha = :fecha";
+    $sql = "SELECT *
+            FROM citas
+            WHERE trabajador = :trabajador
+            AND fecha = :fecha";
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(":trabajador", $dniTrabajador);

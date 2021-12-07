@@ -1,16 +1,3 @@
-const obtenerDiasSemana = () => {
-  let curr = new Date();
-  let week = [];
-
-  for (let i = 1; i <= 7; i++) {
-    let first = curr.getDate() - curr.getDay() + i;
-    let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
-    week.push(day);
-  }
-
-  return week;
-};
-
 $("#servicio").change(function () {
   const idServicio = $(this).val();
 
@@ -25,6 +12,11 @@ $("#servicio").change(function () {
       $("#trabajador").empty();
 
       $("#t-wrapper").show();
+
+      // Insertar opción por defecto
+      $("#trabajador").append(
+        '<option value="">Seleccione un trabajador</option>'
+      );
 
       // Inserta los trabajadores en el select
       trabajadores.forEach((trabajador) => {
@@ -55,6 +47,9 @@ $("#trabajador").change(function () {
 
       $("#f-wrapper").show();
 
+      // Insertar opción por defecto
+      $("#fecha").append('<option value="">Seleccione una fecha</option>');
+
       // Inserta los días de la semana en el select
       dias.forEach((dia) => {
         const option = document.createElement("option");
@@ -69,14 +64,14 @@ $("#trabajador").change(function () {
 });
 
 $("#fecha").change(function () {
-  const dia = $(this).val();
+  const fecha = $(this).val();
   const idServicio = $("#servicio").val();
 
   $.ajax({
     url: "/cita/horas",
     type: "POST",
     data: {
-      dia: dia,
+      fecha: fecha,
       dniTrabajador: $("#trabajador").val(),
       idServicio: idServicio,
     },
@@ -85,6 +80,9 @@ $("#fecha").change(function () {
       $("#hora").empty();
 
       $("#h-wrapper").show();
+
+      // Insertar opción por defecto
+      $("#hora").append('<option value="">Seleccione una hora</option>');
 
       // Inserta las horas del día en el select
       horas.forEach((hora) => {

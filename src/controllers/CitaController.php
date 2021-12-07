@@ -44,70 +44,107 @@ class CitaController
 
   public function fechas()
   {
-    $dniTrabajador = $_POST['dniTrabajador'];
-
-    $citas = Cita::findCitasSemanaTrabajador($dniTrabajador);
-
     // Obtener array de los 7 días posteriores a hoy
     $fechas = array();
-    $fecha = new \DateTime();
-
+    $fechaActual = new \DateTime();
     for ($i = 0; $i < 7; $i++) {
-      $fechas[] = $fecha->format('d-m-Y');
-      $fecha->modify('+1 day');
+      $fechas[] = $fechaActual->format('d-m-Y');
+      $fechaActual->modify('+1 day');
     }
 
-    $diasCitas = array();
+    // Obtener citas del trabajador en las fechas
+    $dniTrabajador = $_POST['dniTrabajador'];
+    $citas = Cita::findCitasSemanaTrabajador($dniTrabajador);
+
+    $citasDiarias = array();
     foreach ($citas as $cita) {
-      if (isset($diasCitas[$cita->fecha])) {
-        $diasCitas[$cita->fecha] += $cita->duracion;
-      } else {
-        $diasCitas[$cita->fecha] = $cita->duracion;
+      $fecha = $cita->fecha;
+      $modulosCita = Servicio::find($cita->servicio)->duracion / 15;
+
+      if (!isset($citasDiarias[$fecha])) {
+        $citasDiarias[$fecha] = 0;
+      }
+
+      $citasDiarias[$fecha] += $modulosCita;
+    }
+
+    $horasDiarias = 6;
+    $minutosDiarios = 60 * $horasDiarias;
+    $modulosDiarios = $minutosDiarios / 15;
+
+    $diasCompletos = array();
+    foreach ($citasDiarias as $fecha => $modulos) {
+      if ($modulos >= $modulosDiarios) {
+        $diasCompletos[] = $fecha;
       }
     }
 
-    $horasDia = 60 * 7;
+    $fechasDisponibles = array_diff($fechas, $diasCompletos);
 
-    foreach ($diasCitas as $dia => $horasOcupadas) {
-      if ($horasOcupadas < $horasDia) {
-        unset($diasCitas[$dia]);
-      }
-    }
-
-    $fechas = array_diff($fechas, array_keys($diasCitas));
-
+    // Devuelve las fechas disponibles en JSON
     header('Content-Type: application/json');
-    echo json_encode(array_values($fechas));
+    echo json_encode(array_values($fechasDisponibles));
   }
 
   public function horas()
   {
-    $dia = $_POST['dia'];
+    $fecha = $_POST['fecha'];
     $dniTrabajador = $_POST['dniTrabajador'];
     $idServicio = $_POST['idServicio'];
 
-    $servicio = Servicio::find($idServicio);
-    $citas = Cita::findCitasDiaTrabajador($dniTrabajador, $dia);
-
-    // Obtener array de las horas de 8 a 15
-    $min = 8 * 60;
-    $max = 15 * 60;
-
+    // Obtener array de horas del día en formato hh:mm
     $horas = array();
-
-    for ($i = $min; $i <= $max; $i += 15) {
-      $horas[] = date('H:i', mktime(0, $i));
+    $horaActual = new \DateTime();
+    $horaActual->setTime(8, 0);
+    for ($i = 0; $i < 25; $i++) {
+      $horas[] = $horaActual->format('H:i');
+      $horaActual->modify('+15 minutes');
     }
 
-    // Obtener array de las horas ocupadas
+    // Obtener citas del trabajador en el día
+    $citas = Cita::findCitasDiaTrabajador($dniTrabajador, $fecha);
+
+    // Obtener horas ocupadas del día
     $horasOcupadas = array();
-    foreach ($citas as $clave => $cita) {
+    foreach ($citas as $cita) {
+      $hora = $cita->hora;
+      $modulosCita = Servicio::find($cita->servicio)->duracion / 15;
+
+      $horaActual = new \DateTime($hora);
+      $horasOcupadas[] = $horaActual->format('H:i');
+      for ($i = 0; $i < $modulosCita - 1; $i++) {
+        $horaActual->modify('+15 minutes');
+        $horasOcupadas[] = $horaActual->format('H:i');
+      }
     }
 
-    $horasOcupadas = array_merge(...$horasOcupadas);
+    // Obtener horas disponibles del día
+    $horasDisponibles = array_diff($horas, $horasOcupadas);
 
+    $servicio = Servicio::find($idServicio);
+    $modulosServicio = $servicio->duracion / 15;
+    // Descartar horas en función de la duración del servicio
+    $horasDisponibles = array_filter(
+      $horasDisponibles,
+      function ($hora) use ($modulosServicio, $horasOcupadas) {
+        $horaActual = new \DateTime($hora);
+
+        $intervalosServicio = array();
+        for ($i = 0; $i < $modulosServicio; $i++) {
+          $intervalosServicio[] = $horaActual->format('H:i');
+          $horaActual->modify('+15 minutes');
+        }
+
+        // Comprobar si los intervalos están en la lista de horas ocupadas
+        $intervalosOcupadas = array_intersect($intervalosServicio, $horasOcupadas);
+
+        return empty($intervalosOcupadas);
+      }
+    );
+
+    // Devuelve las horas disponibles en JSON
     header('Content-Type: application/json');
-    echo json_encode(array_values($horas));
+    echo json_encode(array_values($horasDisponibles));
   }
 
   public function crear()
