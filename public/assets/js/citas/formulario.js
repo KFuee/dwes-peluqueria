@@ -56,7 +56,7 @@ $("#trabajador").change(function () {
 
       $("#f-wrapper").show();
 
-      // Comprobar si hay trabajadores
+      // Comprobar si hay fechas disponibles
       if (fechas.length === 0) {
         $("#fecha").append(
           '<option value="">No hay fechas disponibles</option>'
@@ -98,6 +98,13 @@ $("#fecha").change(function () {
       $("#hora").empty();
 
       $("#h-wrapper").show();
+
+      // Comprobar si hay horas disponibles
+      if (horas.length === 0) {
+        $("#hora").append('<option value="">No hay horas disponibles</option>');
+
+        return;
+      }
 
       // Insertar opción por defecto
       $("#hora").append('<option value="">Seleccione una hora</option>');
