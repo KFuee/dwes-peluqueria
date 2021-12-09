@@ -56,6 +56,7 @@ class ServicioController
 
   public function eliminar()
   {
+    // Eliminar el servicio
     $servicio = new Servicio();
     $servicio->ids = $_POST['ids'];
     $servicio->delete();

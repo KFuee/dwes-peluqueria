@@ -64,9 +64,15 @@ class TrabajadorController
 
   public function eliminar()
   {
+    // Eliminar el trabajador
     $trabajador = new Trabajador();
     $trabajador->dnis = $_POST['dnis'];
     $trabajador->delete();
+
+    // Eliminar todos los servicios que realiza el trabajador
+    $servicioTrabajador = new ServicioTrabajador();
+    $servicioTrabajador->dnis = $_POST['dnis'];
+    $servicioTrabajador->delete();
 
     // Response OK
     header('Content-Type: application/json');

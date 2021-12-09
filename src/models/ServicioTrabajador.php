@@ -51,4 +51,15 @@ class ServicioTrabajador
 
     $stmt->execute();
   }
+
+  public function delete()
+  {
+    $dnis = implode(',', array_map(array($this->db, "quote"), $this->dnis));
+
+    $sql = "DELETE FROM s_trabajadores WHERE dni_trabajador IN ($dnis)";
+
+    $stmt = $this->db->prepare($sql);
+
+    $stmt->execute();
+  }
 }
