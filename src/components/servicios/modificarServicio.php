@@ -12,22 +12,22 @@
 
           <div class="mb-3">
             <label for="nombre" class="col-form-label">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" id="nombre" />
+            <input type="text" class="form-control" name="nombre" id="nombre" required />
           </div>
 
           <div class="mb-3">
             <label for="precio" class="col-form-label">Precio:</label>
-            <input type="text" class="form-control" name="precio" id="precio" />
+            <input type="number" class="form-control" name="precio" id="precio" required />
           </div>
 
           <div class="mb-3">
             <label for="duracion" class="col-form-label">Duración:</label>
-            <input type="text" class="form-control" name="duracion" id="duracion" />
+            <input type="number" class="form-control" name="duracion" id="duracion" required />
           </div>
 
           <div class="mb-3">
             <label for="descripcion" class="col-form-label">Descripción:</label>
-            <textarea class="form-control" name="descripcion" id="descripcion"></textarea>
+            <textarea class="form-control" name="descripcion" id="descripcion" required></textarea>
           </div>
 
         </form>

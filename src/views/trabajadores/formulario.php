@@ -27,42 +27,42 @@ $servicios = Servicio::all();
         <div class="form-group row mb-4">
           <label for="dni" class="col-sm-2 col-form-label">DNI</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="dni" name="dni" />
+            <input type="text" class="form-control" id="dni" name="dni" required />
           </div>
         </div>
 
         <div class="form-group row mb-4">
           <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="nombre" name="nombre" />
+            <input type="text" class="form-control" id="nombre" name="nombre" required />
           </div>
         </div>
 
         <div class="form-group row mb-4">
           <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="apellidos" name="apellidos" />
+            <input type="text" class="form-control" id="apellidos" name="apellidos" required />
           </div>
         </div>
 
         <div class="form-group row mb-4">
           <label for="email" class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="email" name="email" />
+            <input type="email" class="form-control" id="email" name="email" required />
           </div>
         </div>
 
         <div class="form-group row mb-4">
           <label for="categoria" class="col-sm-2 col-form-label">Categoría</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="categoria" name="categoria" />
+            <input type="text" class="form-control" id="categoria" name="categoria" required />
           </div>
         </div>
 
         <div class="form-group row mb-4">
           <label for="servicios" class="col-sm-2 col-form-label">Servicios</label>
           <div class="col-sm-10">
-            <select multiple class="form-control" id="servicios" name="servicios[]">
+            <select multiple class="form-control" id="servicios" name="servicios[]" required>
               <?php
               foreach ($servicios as $servicio) {
                 echo '<option value="' . $servicio->id . '">' . $servicio->nombre . '</option>';

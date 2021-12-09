@@ -15,22 +15,22 @@
 
           <div class="mb-3">
             <label for="nombre" class="col-form-label">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" id="nombre" />
+            <input type="text" class="form-control" name="nombre" id="nombre" required />
           </div>
 
           <div class="mb-3">
             <label for="apellidos" class="col-form-label">Apellidos:</label>
-            <input type="text" class="form-control" name="apellidos" id="apellidos" />
+            <input type="text" class="form-control" name="apellidos" id="apellidos" required />
           </div>
 
           <div class="mb-3">
             <label for="email" class="col-form-label">Email:</label>
-            <input type="text" class="form-control" name="email" id="email" />
+            <input type="email" class="form-control" name="email" id="email" required />
           </div>
 
           <div class="mb-3">
             <label for="categoria" class="col-form-label">Categoría:</label>
-            <input type="text" class="form-control" name="categoria" id="categoria" />
+            <input type="text" class="form-control" name="categoria" id="categoria" required />
           </div>
         </form>
       </div>

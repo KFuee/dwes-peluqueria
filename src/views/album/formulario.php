@@ -27,14 +27,14 @@ $servicios = Servicio::all();
         <div class="form-group row mb-4">
           <label for="fichero" class="col-sm-2 col-form-label">Fichero</label>
           <div class="col-sm-10">
-            <input type="file" class="form-control" id="fichero" name="fichero" accept="image/*" />
+            <input type="file" class="form-control" id="fichero" name="fichero" accept="image/*" required />
           </div>
         </div>
 
         <div class="form-group row mb-4">
           <label for="servicio" class="col-sm-2 col-form-label">Servicio</label>
           <div class="col-sm-10">
-            <select class="form-control" id="servicio" name="servicio">
+            <select class="form-control" id="servicio" name="servicio" required>
               <?php if (count($servicios) > 0) : ?>
                 <option value="">Seleccione un servicio</option>
                 <?php foreach ($servicios as $servicio) : ?>

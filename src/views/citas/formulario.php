@@ -27,7 +27,7 @@ $servicios = Servicio::all();
         <div class="form-group row mb-4">
           <label for="servicio" class="col-sm-2 col-form-label">Servicio</label>
           <div class="col-sm-10">
-            <select class="form-control" id="servicio" name="servicio">
+            <select class="form-control" id="servicio" name="servicio" required>
               <?php if (!empty($servicios)) : ?>
                 <option value="">Seleccione un servicio</option>
                 <?php foreach ($servicios as $servicio) : ?>
@@ -47,49 +47,49 @@ $servicios = Servicio::all();
         <div class="form-group row mb-4" id="t-wrapper" style="display: none;">
           <label for="trabajador" class="col-sm-2 col-form-label">Trabajadores</label>
           <div class="col-sm-10">
-            <select class="form-control" id="trabajador" name="trabajador"></select>
+            <select class="form-control" id="trabajador" name="trabajador" required></select>
           </div>
         </div>
 
         <div class="form-group row mb-4" id="f-wrapper" style="display: none;">
           <label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
           <div class="col-sm-10">
-            <select class="form-control" id="fecha" name="fecha"></select>
+            <select class="form-control" id="fecha" name="fecha" required></select>
           </div>
         </div>
 
         <div class="form-group row mb-4" id="h-wrapper" style="display: none;">
           <label for="hora" class="col-sm-2 col-form-label">Hora</label>
           <div class="col-sm-10">
-            <select class="form-control" id="hora" name="hora"></select>
+            <select class="form-control" id="hora" name="hora" required></select>
           </div>
         </div>
 
         <div class="form-group row mb-4" id="n-wrapper" style="display: none;">
           <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="nombre" name="nombre">
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
           </div>
         </div>
 
         <div class="form-group row mb-4" id="a-wrapper" style="display: none;">
           <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="apellidos" name="apellidos">
+            <input type="text" class="form-control" id="apellidos" name="apellidos" required>
           </div>
         </div>
 
         <div class="form-group row mb-4" id="e-wrapper" style="display: none;">
           <label for="email" class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control" id="email" name="email" required>
           </div>
         </div>
 
         <div class="form-group row mb-4" id="o-wrapper" style="display: none;">
           <label for="observaciones" class="col-sm-2 col-form-label">Observaciones</label>
           <div class="col-sm-10">
-            <textarea class="form-control" id="observaciones" name="observaciones"></textarea>
+            <textarea class="form-control" id="observaciones" name="observaciones" required></textarea>
           </div>
         </div>
 
