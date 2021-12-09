@@ -50,20 +50,29 @@ $("#trabajador").change(function () {
     data: {
       dniTrabajador: dniTrabajador,
     },
-    success: function (dias) {
+    success: function (fechas) {
       // Limpiar select
       $("#fecha").empty();
 
       $("#f-wrapper").show();
 
+      // Comprobar si hay trabajadores
+      if (fechas.length === 0) {
+        $("#fecha").append(
+          '<option value="">No hay fechas disponibles</option>'
+        );
+
+        return;
+      }
+
       // Insertar opción por defecto
       $("#fecha").append('<option value="">Seleccione una fecha</option>');
 
       // Inserta los días de la semana en el select
-      dias.forEach((dia) => {
+      fechas.forEach((fecha) => {
         const option = document.createElement("option");
-        option.value = dia;
-        option.innerText = `${dia}`;
+        option.value = fecha;
+        option.innerText = fecha;
 
         // Insertar elemento option en el select
         $("#fecha").append(option);
