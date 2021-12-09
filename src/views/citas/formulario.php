@@ -29,7 +29,7 @@ $servicios = Servicio::all();
           <div class="col-sm-10">
             <select class="form-control" id="servicio" name="servicio">
               <?php if (!empty($servicios)) : ?>
-                <option value="">Selecciona un servicio</option>
+                <option value="">Seleccione un servicio</option>
                 <?php foreach ($servicios as $servicio) : ?>
                   <?php if (isset($_GET['servicio']) && $_GET['servicio'] == $servicio->id) : ?>
                     <option value="<?= $servicio->id ?>" selected><?= "$servicio->nombre - Duración $servicio->duracion minutos" ?></option>

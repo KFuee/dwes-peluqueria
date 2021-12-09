@@ -12,12 +12,16 @@ function getIdSelections() {
 function detallesFormatter(index, row) {
   var html = [];
   $.each(row, function (key, value) {
-    if (key != "db" && key != "state") {
+    if (key != "db" && key != "state" && value) {
       html.push("<p><b>" + key + ":</b> " + value + "</p>");
     }
   });
 
   return html.join("");
+}
+
+function nombreCompletoFormatter(value, row, index) {
+  return row.nombre + " " + row.apellidos;
 }
 
 function operateFormatter(value, row, index) {
@@ -88,14 +92,10 @@ function iniciarTabla() {
         align: "center",
       },
       {
-        field: "nombre",
-        title: "Nombre",
+        field: "nCompleto",
+        title: "Nombre completo",
         align: "center",
-      },
-      {
-        field: "apellidos",
-        title: "Apellidos",
-        align: "center",
+        formatter: nombreCompletoFormatter,
       },
       {
         field: "email",

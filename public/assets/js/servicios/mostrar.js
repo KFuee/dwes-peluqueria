@@ -20,7 +20,7 @@ function duracionFormatter(data) {
 function detallesFormatter(index, row) {
   var html = [];
   $.each(row, function (key, value) {
-    if (key != "db" && key != "state") {
+    if (key != "db" && key != "state" && value) {
       html.push("<p><b>" + key + ":</b> " + value + "</p>");
     }
   });
@@ -87,11 +87,6 @@ function iniciarTabla() {
         checkbox: true,
         align: "center",
         valign: "middle",
-      },
-      {
-        field: "id",
-        title: "ID",
-        align: "center",
       },
       {
         field: "nombre",

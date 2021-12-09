@@ -35,10 +35,14 @@ $servicios = Servicio::all();
           <label for="servicio" class="col-sm-2 col-form-label">Servicio</label>
           <div class="col-sm-10">
             <select class="form-control" id="servicio" name="servicio">
-              <option value="">Selecciona un servicio</option>
-              <?php foreach ($servicios as $servicio) : ?>
-                <option value="<?= $servicio->id ?>"><?= $servicio->nombre ?></option>
-              <?php endforeach; ?>
+              <?php if (count($servicios) > 0) : ?>
+                <option value="">Seleccione un servicio</option>
+                <?php foreach ($servicios as $servicio) : ?>
+                  <option value="<?= $servicio->id ?>"><?= $servicio->nombre ?></option>
+                <?php endforeach; ?>
+              <?php else : ?>
+                <option value="">No hay servicios disponibles</option>
+              <?php endif; ?>
             </select>
           </div>
         </div>

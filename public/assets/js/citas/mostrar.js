@@ -12,7 +12,7 @@ function getIdSelections() {
 function detallesFormatter(index, row) {
   var html = [];
   $.each(row, function (key, value) {
-    if (key != "db" && key != "state") {
+    if (key != "db" && key != "state" && value) {
       html.push("<p><b>" + key + ":</b> " + value + "</p>");
     }
   });
@@ -20,8 +20,30 @@ function detallesFormatter(index, row) {
   return html.join("");
 }
 
+function fechaFormatter(value, row, index) {
+  return row.fecha + " " + row.hora;
+}
+
+function nClienteFormatter(value, row, index) {
+  return row.nombre + " " + row.apellidos;
+}
+
 function operateFormatter(value, row, index) {
   return [
+    // Botón mailto para recordar la cita al cliente
+    '<a class="btn btn-primary btn-sm me-2" href="mailto:' +
+      row.email +
+      "?subject=Cita peluquería&body=Hola " +
+      row.nombre +
+      " " +
+      row.apellidos +
+      ",%0D%0A%0D%0A Te recordamos que has reservado una cita para el día " +
+      row.fecha +
+      " a las " +
+      row.hora +
+      ".%0D%0A%0D%0A¡Gracias por confiar en nosotros!%0D%0A%0D%0ASaludos, " +
+      row.trabajador,
+    '"><i class="fa fa-envelope"></i></a>',
     '<button class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash"></i></button>',
   ].join("");
 }
@@ -66,11 +88,6 @@ function iniciarTabla() {
         valign: "middle",
       },
       {
-        field: "id",
-        title: "ID",
-        align: "center",
-      },
-      {
         field: "trabajador",
         title: "Trabajador",
         align: "center",
@@ -85,22 +102,13 @@ function iniciarTabla() {
         title: "Fecha",
         align: "center",
         sortable: true,
+        formatter: fechaFormatter,
       },
       {
-        field: "hora",
-        title: "Hora",
+        field: "nCliente",
+        title: "Nombre cliente",
         align: "center",
-        sortable: true,
-      },
-      {
-        field: "nombre",
-        title: "Nombre",
-        align: "center",
-      },
-      {
-        field: "apellidos",
-        title: "Apellidos",
-        align: "center",
+        formatter: nClienteFormatter,
       },
       {
         field: "email",
