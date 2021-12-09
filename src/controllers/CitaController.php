@@ -33,6 +33,7 @@ class CitaController
     $servicio = $_POST['idServicio'];
     $serviciosTrabajador = ServicioTrabajador::find($servicio);
 
+    $trabajadores = [];
     foreach ($serviciosTrabajador as $servicioTrabajador) {
       $trabajador = Trabajador::find($servicioTrabajador->dni_trabajador);
       $trabajadores[] = $trabajador;

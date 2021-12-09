@@ -13,6 +13,15 @@ $("#servicio").change(function () {
 
       $("#t-wrapper").show();
 
+      // Comprobar si hay trabajadores
+      if (trabajadores.length === 0) {
+        $("#trabajador").append(
+          '<option value="">No hay trabajadores disponibles</option>'
+        );
+
+        return;
+      }
+
       // Insertar opción por defecto
       $("#trabajador").append(
         '<option value="">Seleccione un trabajador</option>'
