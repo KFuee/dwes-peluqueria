@@ -28,14 +28,18 @@ $servicios = Servicio::all();
           <label for="servicio" class="col-sm-2 col-form-label">Servicio</label>
           <div class="col-sm-10">
             <select class="form-control" id="servicio" name="servicio">
-              <option value="">Selecciona un servicio</option>
-              <?php foreach ($servicios as $servicio) : ?>
-                <?php if (isset($_GET['servicio']) && $_GET['servicio'] == $servicio->id) : ?>
-                  <option value="<?= $servicio->id ?>" selected><?= "$servicio->nombre - Duración $servicio->duracion minutos" ?></option>
-                <?php else : ?>
-                  <option value="<?= $servicio->id ?>"><?= "$servicio->nombre - Duración $servicio->duracion minutos" ?></option>
-                <?php endif; ?>
-              <?php endforeach; ?>
+              <?php if (!empty($servicios)) : ?>
+                <option value="">Selecciona un servicio</option>
+                <?php foreach ($servicios as $servicio) : ?>
+                  <?php if (isset($_GET['servicio']) && $_GET['servicio'] == $servicio->id) : ?>
+                    <option value="<?= $servicio->id ?>" selected><?= "$servicio->nombre - Duración $servicio->duracion minutos" ?></option>
+                  <?php else : ?>
+                    <option value="<?= $servicio->id ?>"><?= "$servicio->nombre - Duración $servicio->duracion minutos" ?></option>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              <?php else : ?>
+                <option value="">No hay servicios disponibles</option>
+              <?php endif; ?>
             </select>
           </div>
         </div>
