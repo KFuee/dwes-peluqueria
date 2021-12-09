@@ -77,7 +77,7 @@ $fotografias = Fotografia::all();
                 <div class="card-body">
                   <p class="card-text text-center">
                     <i class="fas fa-database me-2" style="color: #dc3545;"></i>
-                    <b>No se han encontrado fotografías</b>
+                    <b>No se encontraron fotografías</b>
                   </p>
                 </div>
               </div>
