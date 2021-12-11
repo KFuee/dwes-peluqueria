@@ -20,7 +20,7 @@ function duracionFormatter(data) {
 function detallesFormatter(index, row) {
   var html = [];
   $.each(row, function (key, value) {
-    if (key != "db" && key != "state" && value) {
+    if (key != "state" && value) {
       html.push("<p><b>" + key + ":</b> " + value + "</p>");
     }
   });
