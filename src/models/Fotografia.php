@@ -5,8 +5,9 @@ namespace Peluqueria\App\Models;
 use Peluqueria\Core\Database;
 
 use PDO;
+use Peluqueria\Core\Model;
 
-class Fotografia
+class Fotografia extends Model
 {
   public static function all()
   {
