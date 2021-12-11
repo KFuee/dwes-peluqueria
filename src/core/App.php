@@ -2,12 +2,21 @@
 
 namespace Peluqueria\Core;
 
+use Peluqueria\Core\Database;
+
 class App
 {
   public function __construct()
   {
     // Comprobar si la sesión está iniciada
     if (session_status() == PHP_SESSION_NONE) session_start();
+
+    if ($this->isFirstTime()) {
+      $this->setup();
+
+      // Evita que se cargue un controlador
+      return;
+    }
 
     // Cargar el controlador y la acción introducida
     $this->run();
@@ -58,5 +67,31 @@ class App
     header("HTTP/1.0 404 Not Found");
     $mensaje = "No se ha encontrado el $tipo especificado.";
     exit($mensaje);
+  }
+
+  // Función que comprueba si es la primera vez que se ejecuta el servidor
+  public static function isFirstTime()
+  {
+    if (!file_exists(__DIR__ . '/../../.installed')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private function setup()
+  {
+    // Poner en marcha la base de datos
+    Database::setup();
+
+    // Crea el archivo de marca de instalación
+    $file = fopen(__DIR__ . '/../../.installed', 'w');
+    fclose($file);
+
+    // Añade a la sesión que ya se ha instalado
+    $_SESSION['installed'] = true;
+
+    // Redirige a la página de inicio
+    $this->redirect('/home');
   }
 }
