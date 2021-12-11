@@ -16,42 +16,44 @@ if (isset($_SESSION['usuario']))
           <a class="nav-link" aria-current="page" href="/home">Home</a>
         </li>
 
-        <?php if ($usuario) {
-          if ($usuario['rol'] !== 'cliente') ?>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Citas
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="/cita">Mostrar citas</a></li>
-              <li><a class="dropdown-item" href="/cita/formulario">Pedir cita</a></li>
-            </ul>
-          </li>
-        <?php } else { ?>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/cita/formulario">Pedir cita</a>
-          </li>
-        <?php } ?>
+        <?php if ($usuario) : ?>
+          <?php if ($usuario->rol != 'cliente') : ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Citas
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/cita">Mostrar citas</a></li>
+                <li><a class="dropdown-item" href="/cita/formulario">Pedir cita</a></li>
+              </ul>
+            </li>
+          <?php else : ?>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/cita/formulario">Pedir cita</a>
+            </li>
+          <?php endif; ?>
+        <?php endif; ?>
 
-        <?php if ($usuario) {
-          if ($usuario['rol'] !== 'cliente') ?>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Album
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="/album">Mostrar album</a></li>
-              <li><a class="dropdown-item" href="/album/formulario">Añadir entrada</a></li>
-            </ul>
-          </li>
-        <?php } else { ?>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/album">Album</a>
-          </li>
-        <?php } ?>
+        <?php if ($usuario) : ?>
+          <?php if ($usuario->rol != 'cliente') : ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Album
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/album">Mostrar album</a></li>
+                <li><a class="dropdown-item" href="/album/formulario">Añadir entrada</a></li>
+              </ul>
+            </li>
+          <?php else : ?>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/album">Album</a>
+            </li>
+          <?php endif; ?>
+        <?php endif; ?>
 
-        <?php if ($usuario) {
-          if ($usuario['rol'] !== 'cliente') { ?>
+        <?php if ($usuario) : ?>
+          <?php if ($usuario->rol != 'cliente') : ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Servicios
@@ -72,20 +74,19 @@ if (isset($_SESSION['usuario']))
                 <li><a class="dropdown-item" href="/trabajador/formulario">Alta trabajador</a></li>
               </ul>
             </li>
-        <?php }
-        } ?>
+          <?php endif; ?>
+        <?php endif; ?>
       </ul>
 
       <form class="d-flex">
         <?php
-        if ($usuario) {
-          echo "<a class='btn btn-outline-success me-2' href='/usuario'>Usuario</a>";
-          echo "<a class='btn btn-outline-danger' href='/usuario/logout'>Cerrar sesión</a>";
-        } else {
-          echo "<a class='btn btn-outline-primary me-2' href='/usuario/registro'>Registrarse</a>";
-          echo "<a class='btn btn-outline-success' href='/usuario/login'>Iniciar sesión</a>";
-        }
-        ?>
+        if ($usuario) : ?>
+          <a class='btn btn-outline-success me-2' href='/usuario'>Usuario</a>
+          <a class='btn btn-outline-danger' href='/usuario/logout'>Cerrar sesión</a>
+        <?php else : ?>
+          <a class='btn btn-outline-primary me-2' href='/usuario/registro'>Registrarse</a>
+          <a class='btn btn-outline-success' href='/usuario/login'>Iniciar sesión</a>
+        <?php endif; ?>
       </form>
     </div>
   </div>

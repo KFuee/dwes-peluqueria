@@ -2,17 +2,13 @@
 
 namespace Peluqueria\App\Models;
 
+use Peluqueria\Core\Model;
 use Peluqueria\Core\Database;
 
 use PDO;
 
-class Usuario
+class Usuario extends Model
 {
-  public function __construct()
-  {
-    $this->db = Database::getConnection();
-  }
-
   public static function all()
   {
     $db = Database::getConnection();
@@ -39,32 +35,28 @@ class Usuario
     return $usuario;
   }
 
-  public static function getPassword($email)
-  {
-    $usuario = self::find($email);
-    return $usuario->password;
-  }
-
   public function insert()
   {
-    $sql = "INSERT INTO usuarios (id, nombre, apellidos, email, password)
-            VALUES (:id, :nombre, :apellidos, :email, :password)";
+    $db = Database::getConnection();
+    $sql = "INSERT INTO usuarios (nombre, apellidos, email, password, rol)
+            VALUES (:nombre, :apellidos, :email, :password, :rol)";
 
-    $stmt = $this->db->prepare($sql);
-    $stmt->bindValue(":id", $this->id);
+    $stmt = $db->prepare($sql);
     $stmt->bindValue(":nombre", $this->nombre);
     $stmt->bindValue(":apellidos", $this->apellidos);
     $stmt->bindValue(":email", $this->email);
     $stmt->bindValue(":password", $this->password);
+    $stmt->bindValue(":rol", $this->rol);
 
     $stmt->execute();
   }
 
   public function delete()
   {
+    $db = Database::getConnection();
     $sql = "DELETE FROM usuarios WHERE id = :id";
 
-    $stmt = $this->db->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->bindValue(":id", $this->id);
 
     $stmt->execute();
@@ -72,17 +64,19 @@ class Usuario
 
   public function save()
   {
+    $db = Database::getConnection();
     $sql = "UPDATE usuarios
             SET nombre = :nombre, apellidos = :apellidos,
-                email = :email, password = :password
+                email = :email, password = :password, rol = :rol
             WHERE id = :id";
 
-    $stmt = $this->db->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->bindValue(":id", $this->id);
     $stmt->bindValue(":nombre", $this->nombre);
     $stmt->bindValue(":apellidos", $this->apellidos);
     $stmt->bindValue(":email", $this->email);
     $stmt->bindValue(":password", $this->password);
+    $stmt->bindValue(":rol", $this->rol);
 
     $stmt->execute();
   }

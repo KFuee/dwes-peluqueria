@@ -5,6 +5,8 @@
   <?php require(PATH . '/components/head.php'); ?>
 
   <title>Home</title>
+  <style>
+  </style>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -20,8 +22,8 @@
       // Comprueba si el usuario está logueado
       if ($usuario) {
         // Muestra los datos del usuario
-        echo "<p>Iniciada sesión como: <b>" . $usuario['email'] . "</b>, eres <b>"
-          . $usuario['rol'] . "</b></p>";
+        echo "<p>Iniciada sesión como: <b>" . $usuario->email . "</b>, eres <b>"
+          . $usuario->rol . "</b></p>";
       } else echo "Inicia sesión para realizar cambios"
       ?>
     </div>

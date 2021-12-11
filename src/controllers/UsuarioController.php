@@ -36,7 +36,6 @@ class UsuarioController
     $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     // Instanciar un nuevo usuario y asignar propiedades
     $usuario = new Usuario();
-    $usuario->id = uniqid("u-", false);
     $usuario->nombre = $_POST['nombre'];
     $usuario->apellidos = $_POST['apellidos'];
     $usuario->email = $_POST['email'];
@@ -59,22 +58,13 @@ class UsuarioController
     }
 
     // Comprobar que la contraseña sea correcta
-    if (!password_verify(
-      $_POST['password'],
-      $usuario->password
-    )) {
+    if (!password_verify($_POST['password'], $usuario->password)) {
       // Si no es correcta, redirigir a login
       App::redirect("/usuario/login");
     }
 
     // Crear una sesión
-    $_SESSION['usuario'] = [
-      'id' => $usuario->id,
-      'nombre' => $usuario->nombre,
-      'apellidos' => $usuario->apellidos,
-      'email' => $usuario->email,
-      'rol' => $usuario->rol
-    ];
+    $_SESSION['usuario'] = $usuario;
 
     // Redirigir a la página principal
     App::redirect("/home");
