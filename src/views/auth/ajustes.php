@@ -17,11 +17,11 @@
       <h2 class="mb-4">Usuario - Datos</h2>
 
       <?php
-      echo "<b>ID</b>: " . $usuario['id'] . "<br>";
-      echo "<b>Nombre completo</b>: " . $usuario['nombre'] . " "
-        . $usuario['apellidos'] . "<br>";
-      echo "<b>Correo electrónico</b>: " . $usuario['email'] . "<br>";
-      echo "<b>Rol</b>: " . $usuario['rol'];
+      echo "<b>ID</b>: " . $usuario->id . "<br>";
+      echo "<b>Nombre completo</b>: " . $usuario->nombre . " "
+        . $usuario->apellidos . "<br>";
+      echo "<b>Correo electrónico</b>: " . $usuario->email . "<br>";
+      echo "<b>Rol</b>: " . $usuario->rol;
       ?>
     </div>
   </div>

@@ -6,6 +6,3 @@ if ($_ENV['APP_ENV'] !== 'dev') {
 
 // En caso de que APP_ENV sea desarrollo
 define('PATH', '/var/www/html/src');
-
-// Path de root
-define('ROOT', dirname(__DIR__));
