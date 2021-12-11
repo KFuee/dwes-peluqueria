@@ -8,11 +8,6 @@ use PDO;
 
 class Trabajador
 {
-  public function __construct()
-  {
-    $this->db = Database::getConnection();
-  }
-
   public static function all()
   {
     $db = Database::getConnection();
@@ -41,10 +36,11 @@ class Trabajador
 
   public function insert()
   {
+    $db = Database::getConnection();
     $sql = "INSERT INTO trabajadores (dni, nombre, apellidos, email, categoria)
             VALUES (:dni, :nombre, :apellidos, :email, :categoria)";
 
-    $stmt = $this->db->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->bindValue(":dni", $this->dni);
     $stmt->bindValue(":nombre", $this->nombre);
     $stmt->bindValue(":apellidos", $this->apellidos);
@@ -56,23 +52,25 @@ class Trabajador
 
   public function delete()
   {
-    $dnis = implode(',', array_map(array($this->db, "quote"), $this->dnis));
+    $db = Database::getConnection();
 
+    $dnis = implode(',', array_map(array($this->db, "quote"), $this->dnis));
     $sql = "DELETE FROM trabajadores WHERE dni IN ($dnis)";
 
-    $stmt = $this->db->prepare($sql);
+    $stmt = $db->prepare($sql);
 
     $stmt->execute();
   }
 
   public function save()
   {
+    $db = Database::getConnection();
     $sql = "UPDATE trabajadores
             SET nombre = :nombre, apellidos = :apellidos,
                 email = :email, categoria = :categoria
             WHERE dni = :dni";
 
-    $stmt = $this->db->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->bindValue(":dni", $this->dni);
     $stmt->bindValue(":nombre", $this->nombre);
     $stmt->bindValue(":apellidos", $this->apellidos);

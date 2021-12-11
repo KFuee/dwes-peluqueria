@@ -8,11 +8,6 @@ use PDO;
 
 class ServicioTrabajador
 {
-  public function __construct()
-  {
-    $this->db = Database::getConnection();
-  }
-
   public static function all()
   {
     $db = Database::getConnection();
@@ -42,10 +37,11 @@ class ServicioTrabajador
 
   public function insert()
   {
+    $db = Database::getConnection();
     $sql = "INSERT INTO s_trabajadores (id_servicio, dni_trabajador)
             VALUES (:id_servicio, :dni_trabajador)";
 
-    $stmt = $this->db->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->bindValue(":id_servicio", $this->idServicio);
     $stmt->bindValue(":dni_trabajador", $this->dniTrabajador);
 
@@ -54,11 +50,12 @@ class ServicioTrabajador
 
   public function delete()
   {
-    $dnis = implode(',', array_map(array($this->db, "quote"), $this->dnis));
+    $db = Database::getConnection();
 
+    $dnis = implode(',', array_map(array($this->db, "quote"), $this->dnis));
     $sql = "DELETE FROM s_trabajadores WHERE dni_trabajador IN ($dnis)";
 
-    $stmt = $this->db->prepare($sql);
+    $stmt = $db->prepare($sql);
 
     $stmt->execute();
   }

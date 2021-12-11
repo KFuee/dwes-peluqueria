@@ -8,11 +8,6 @@ use PDO;
 
 class Cita
 {
-  public function __construct()
-  {
-    $this->db = Database::getConnection();
-  }
-
   public static function all()
   {
     $db = Database::getConnection();
@@ -76,10 +71,11 @@ class Cita
 
   public function insert()
   {
+    $db = Database::getConnection();
     $sql = "INSERT INTO citas (trabajador, servicio, fecha, hora, nombre, apellidos, email, observaciones)
             VALUES (:trabajador, :servicio, :fecha, :hora, :nombre, :apellidos, :email, :observaciones)";
 
-    $stmt = $this->db->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->bindValue(":trabajador", $this->trabajador);
     $stmt->bindValue(":servicio", $this->servicio);
     $stmt->bindValue(":fecha", $this->fecha);
@@ -94,17 +90,19 @@ class Cita
 
   public function delete()
   {
-    $ids = implode(',', array_map(array($this->db, "quote"), $this->ids));
+    $db = Database::getConnection();
 
+    $ids = implode(',', array_map(array($this->db, "quote"), $this->ids));
     $sql = "DELETE FROM citas WHERE id IN ($ids)";
 
-    $stmt = $this->db->prepare($sql);
+    $stmt = $db->prepare($sql);
 
     $stmt->execute();
   }
 
   public function save()
   {
+    $db = Database::getConnection();
     $sql = "UPDATE citas
             SET id = :id, servicio = :servicio, trabajador = :trabajador,
                 fecha = :fecha, hora = :hora,
@@ -112,7 +110,7 @@ class Cita
                 observaciones = :observaciones
             WHERE id = :id";
 
-    $stmt = $this->db->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->bindValue(":id", $this->id);
     $stmt->bindValue(":trabajador", $this->trabajador);
     $stmt->bindValue(":servicio", $this->servicio);

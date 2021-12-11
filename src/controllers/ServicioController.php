@@ -30,7 +30,6 @@ class ServicioController
   public function insertar()
   {
     $servicio = new Servicio();
-    $servicio->id = uniqid("s-", false);
     foreach ($_POST as $clave => $valor) {
       $servicio->$clave = $valor;
     }
