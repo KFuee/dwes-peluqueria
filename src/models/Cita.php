@@ -124,4 +124,32 @@ class Cita extends Model
 
     $stmt->execute();
   }
+
+  public function nombreTrabajador()
+  {
+    $db = Database::getConnection();
+    $sql = "SELECT * FROM trabajadores WHERE dni = :dni";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":dni", $this->trabajador);
+    $stmt->execute();
+
+    $trabajador = $stmt->fetchObject(Trabajador::class);
+
+    return $trabajador;
+  }
+
+  public function nombreServicio()
+  {
+    $db = Database::getConnection();
+    $sql = "SELECT * FROM servicios WHERE id = :id";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":id", $this->servicio);
+    $stmt->execute();
+
+    $servicio = $stmt->fetchObject(Servicio::class);
+
+    return $servicio;
+  }
 }

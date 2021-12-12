@@ -25,6 +25,11 @@ class CitaController
   public function data()
   {
     $citas = Cita::all();
+    // Añade a cada cita el nombre del trabajador y el nombre del servicio
+    foreach ($citas as $cita) {
+      $cita->trabajador = $cita->nombreTrabajador->nombre . ' ' . $cita->nombreTrabajador->apellidos;
+      $cita->servicio = $cita->nombreServicio->nombre;
+    }
     echo json_encode($citas);
   }
 
