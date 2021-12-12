@@ -1,4 +1,4 @@
-CREATE TABLE `s_trabajadores` (
+CREATE TABLE IF NOT EXISTS `s_trabajadores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_servicio` varchar(255) NOT NULL,
   `dni_trabajador` varchar(255) NOT NULL,

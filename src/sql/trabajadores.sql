@@ -1,4 +1,4 @@
-CREATE TABLE `trabajadores` (
+CREATE TABLE IF NOT EXISTS `trabajadores` (
   `dni` varchar(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellidos` varchar(255) NOT NULL,
