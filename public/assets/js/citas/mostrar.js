@@ -12,7 +12,12 @@ function getIdSelections() {
 function detallesFormatter(index, row) {
   var html = [];
   $.each(row, function (key, value) {
-    if (key != "state" && value) {
+    if (
+      key != "nombreTrabajador" &&
+      key != "nombreServicio" &&
+      key != "state" &&
+      value
+    ) {
       html.push("<p><b>" + key + ":</b> " + value + "</p>");
     }
   });
