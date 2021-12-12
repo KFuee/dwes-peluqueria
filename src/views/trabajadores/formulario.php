@@ -63,11 +63,13 @@ $servicios = Servicio::all();
           <label for="servicios" class="col-sm-2 col-form-label">Servicios</label>
           <div class="col-sm-10">
             <select multiple class="form-control" id="servicios" name="servicios[]" required>
-              <?php
-              foreach ($servicios as $servicio) {
-                echo '<option value="' . $servicio->id . '">' . $servicio->nombre . '</option>';
-              }
-              ?>
+              <?php if (count($servicios) > 0) : ?>
+                <?php foreach ($servicios as $servicio) : ?>
+                  <option value="<?= $servicio->id ?>"><?= $servicio->nombre ?></option>
+                <?php endforeach; ?>
+              <?php else : ?>
+                <option value="">No hay servicios</option>
+              <?php endif; ?>
             </select>
           </div>
         </div>
