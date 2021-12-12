@@ -83,6 +83,19 @@ class Trabajador extends Model
 
   public function servicios()
   {
-    return "hola";
+    $db = Database::getConnection();
+    $sql = "SELECT s.*
+            FROM s_trabajadores st
+              JOIN servicios s ON st.id_servicio = s.id
+            WHERE st.dni_trabajador = :dni";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(":dni", $this->dni);
+
+    $stmt->execute();
+
+    $servicios = $stmt->fetchAll(PDO::FETCH_CLASS, Servicio::class);
+
+    return $servicios;
   }
 }

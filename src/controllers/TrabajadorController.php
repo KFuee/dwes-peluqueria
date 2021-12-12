@@ -24,6 +24,11 @@ class TrabajadorController
   public function data()
   {
     $trabajadores = Trabajador::all();
+    // Añade a cada trabajador la propiedad servicios
+    foreach ($trabajadores as $trabajador) {
+      $trabajador->servicios = $trabajador->servicios;
+    }
+
     echo json_encode($trabajadores);
   }
 

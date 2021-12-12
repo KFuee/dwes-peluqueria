@@ -12,8 +12,25 @@ function getIdSelections() {
 function detallesFormatter(index, row) {
   var html = [];
   $.each(row, function (key, value) {
-    if (key != "state" && value) {
+    if (key != "servicios" && key != "state" && value) {
       html.push("<p><b>" + key + ":</b> " + value + "</p>");
+    }
+
+    if (key == "servicios") {
+      var servicios = "";
+      for (let i = 0; i < value.length; i++) {
+        var servicio = value[i];
+
+        servicios += servicio.nombre + ", ";
+      }
+
+      html.push(
+        "<p><b>" +
+          key +
+          ":</b> " +
+          servicios.substring(0, servicios.length - 2) +
+          "</p>"
+      );
     }
   });
 
@@ -22,6 +39,17 @@ function detallesFormatter(index, row) {
 
 function nombreCompletoFormatter(value, row, index) {
   return row.nombre + " " + row.apellidos;
+}
+
+function serviciosFormatter(value, row, index) {
+  var servicios = "";
+  for (let i = 0; i < value.length; i++) {
+    var servicio = value[i];
+
+    servicios += servicio.nombre + ", ";
+  }
+
+  return servicios.substring(0, servicios.length - 2);
 }
 
 function operateFormatter(value, row, index) {
@@ -106,6 +134,12 @@ function iniciarTabla() {
         field: "categoria",
         title: "Categoría",
         align: "center",
+      },
+      {
+        field: "servicios",
+        title: "Servicios",
+        align: "center",
+        formatter: serviciosFormatter,
       },
       {
         field: "operate",
