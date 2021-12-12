@@ -58,7 +58,11 @@ $fotografias = Fotografia::all();
                     <p class="card-text"><?= "<b>Servicio</b>: " . $servicio->nombre . "<br>" ?></p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <a href="<?= $fotografia->localizacion ?>" target="_blank" class="btn btn-sm btn-outline-success">Ver</a>
+                        <?php if ($_ENV['APP_ENV'] !== 'dev') : ?>
+                          <a href="<?= $fotografia->localizacion ?>" target="_blank" class="btn btn-sm btn-outline-success">Ver</a>
+                        <?php else : ?>
+                          <a href="/subidas/<?= $fotografia->localizacion ?>" target="_blank" class="btn btn-sm btn-outline-success">Ver</a>
+                        <?php endif; ?>
                         <a href="/cita/formulario?servicio=<?= $fotografia->id_servicio ?>" class="btn btn-sm btn-outline-primary">Pedir cita</a>
                       </div>
 
