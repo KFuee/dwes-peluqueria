@@ -55,7 +55,7 @@ class Trabajador extends Model
   {
     $db = Database::getConnection();
 
-    $dnis = implode(',', array_map(array($this->db, "quote"), $this->dnis));
+    $dnis = '"' . implode('", "', $this->dnis) . '"';
     $sql = "DELETE FROM trabajadores WHERE dni IN ($dnis)";
 
     $stmt = $db->prepare($sql);
@@ -79,5 +79,10 @@ class Trabajador extends Model
     $stmt->bindValue(":categoria", $this->categoria);
 
     $stmt->execute();
+  }
+
+  public function servicios()
+  {
+    return "hola";
   }
 }
