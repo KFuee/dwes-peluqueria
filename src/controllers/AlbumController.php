@@ -99,17 +99,24 @@ class AlbumController
 
   private function eliminarS3($id)
   {
-    $fotografia = new Fotografia();
-    $fotografia->id = $id;
-    $fotografia->delete();
-
     // Eliminar la fotografía del bucket S3
+    $fotografia = Fotografia::find($id);
+
     $s3Client = App::s3Client();
+
+    // Obtener la key de la url completa
+    $key = substr(
+      $fotografia->localizacion,
+      strpos($fotografia->localizacion, 'subidas/')
+    );
 
     $s3Client->deleteObject([
       'Bucket' => 'dwes-peluqueria',
-      'Key'    => $fotografia->localizacion
+      'Key'    => $key
     ]);
+
+    // Eliminar la fotografía de la base de datos
+    $fotografia->delete();
 
     // Redireccionar al usuario al album
     App::redirect('/album');
@@ -118,7 +125,7 @@ class AlbumController
 
   private function eliminarLocal($id)
   {
-    // Eliminar el archivo del servidor
+    // Eliminar la fotografía del servidor
     $fotografia = Fotografia::find($id);
     $localizacion = PATH . '/../public/subidas/' . $fotografia->localizacion;
     unlink($localizacion);
