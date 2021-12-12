@@ -40,6 +40,7 @@ class UsuarioController
     $usuario->apellidos = $_POST['apellidos'];
     $usuario->email = $_POST['email'];
     $usuario->password = $hash;
+    $usuario->rol = 'cliente';
 
     // Guardar el usuario en la base de datos
     $usuario->insert();
