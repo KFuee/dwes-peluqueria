@@ -81,6 +81,10 @@ function iniciarTabla() {
     showExport: true,
     exportTypes: ["pdf", "sql", "excel"],
     showColumns: true,
+    showPaginationSwitch: true,
+    pagination: true,
+    paginationParts: ["pageInfo", "pageList"],
+    pageSize: 5,
     columns: [
       {
         field: "state",

@@ -63,7 +63,7 @@ class Fotografia extends Model
   {
     $db = Database::getConnection();
 
-    $ids = implode(',', array_map(array($this->db, "quote"), $this->ids));
+    $ids = '"' . implode('", "', $this->ids) . '"';
     $sql = "DELETE FROM fotografias WHERE id_servicio IN ($ids)";
 
     $stmt = $db->prepare($sql);
