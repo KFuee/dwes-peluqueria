@@ -13,7 +13,6 @@
     "heroku/heroku-buildpack-php": "*"
   },
   "require": {
-    "dompdf/dompdf": "^1.1",
     "aws/aws-sdk-php": "^3.208"
   }
 }
