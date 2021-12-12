@@ -38,11 +38,11 @@ class Fotografia extends Model
   public function insert()
   {
     $db = Database::getConnection();
-    $sql = "INSERT INTO fotografias (nombre_fichero, id_servicio)
-            VALUES (:nombre_fichero, :id_servicio)";
+    $sql = "INSERT INTO fotografias (localizacion, id_servicio)
+            VALUES (:localizacion, :id_servicio)";
 
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(":nombre_fichero", $this->nombre_fichero);
+    $stmt->bindValue(":localizacion", $this->localizacion);
     $stmt->bindValue(":id_servicio", $this->id_servicio);
 
     $stmt->execute();
@@ -75,13 +75,13 @@ class Fotografia extends Model
   {
     $db = Database::getConnection();
     $sql = "UPDATE fotografias
-            SET nombre_fichero = :nombre_fichero,
+            SET localizacion = :localizacion,
                 id_servicio = :id_servicio,
             WHERE id = :id";
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(":id", $this->id);
-    $stmt->bindValue(":nombre_fichero", $this->nombre_fichero);
+    $stmt->bindValue(":localizacion", $this->localizacion);
     $stmt->bindValue(":id_servicio", $this->id_servicio);
 
     $stmt->execute();

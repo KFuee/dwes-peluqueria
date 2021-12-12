@@ -48,13 +48,17 @@ $fotografias = Fotografia::all();
               <?php $servicio = Servicio::find($fotografia->id_servicio); ?>
               <div class="col">
                 <div class="card shadow-sm">
-                  <img class="card-img-top" src="/subidas/<?= $fotografia->nombre_fichero ?>" alt="Imagen album">
+                  <?php if ($_ENV['APP_ENV'] !== 'dev') : ?>
+                    <img class="card-img-top" src="<?= $fotografia->localizacion ?>" alt="Imagen album">
+                  <?php else : ?>
+                    <img class="card-img-top" src="/subidas/<?= $fotografia->localizacion ?>" alt="Imagen album">
+                  <?php endif; ?>
 
                   <div class="card-body">
                     <p class="card-text"><?= "<b>Servicio</b>: " . $servicio->nombre . "<br>" ?></p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <a href="/subidas/<?= $fotografia->nombre_fichero ?>" target="_blank" class="btn btn-sm btn-outline-success">Ver</a>
+                        <a href="<?= $fotografia->localizacion ?>" target="_blank" class="btn btn-sm btn-outline-success">Ver</a>
                         <a href="/cita/formulario?servicio=<?= $fotografia->id_servicio ?>" class="btn btn-sm btn-outline-primary">Pedir cita</a>
                       </div>
 

@@ -20,8 +20,8 @@ class HomeController
               Swal.fire({
                 icon: 'info',
                 title: 'Configuración inicial',
-                html: `Parece que es la primera vez que entras en la página,
-                se ha generado la base de datos <b>peluquería</b> con las siguientes tablas:
+                html: `Parece que es la primera vez que entras en la página.
+                Se ha generado la base de datos <b>peluquería</b> con las siguientes tablas:
                 <br><br>
                 <ul style='list-style: none; padding-left: 0;'>
                   <li><b>Citas</b></li>

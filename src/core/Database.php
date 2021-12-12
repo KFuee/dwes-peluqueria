@@ -65,7 +65,7 @@ class Database
 
     // Crea las tablas en caso de que no existan
     // Obtener todos los archivos .sql de la carpeta sql
-    $sqlFiles = glob(__DIR__ . "/../sql/*.sql");
+    $sqlFiles = glob(PATH . "/sql/*.sql");
 
     foreach ($sqlFiles as $file) {
       $sql = file_get_contents($file);

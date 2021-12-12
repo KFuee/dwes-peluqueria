@@ -3,6 +3,7 @@
 namespace Peluqueria\Core;
 
 use Peluqueria\Core\Database;
+use Aws\S3\S3Client;
 
 class App
 {
@@ -72,7 +73,7 @@ class App
   // Función que comprueba si es la primera vez que se ejecuta el servidor
   public static function isFirstTime()
   {
-    if (!file_exists(__DIR__ . '/../../.installed')) {
+    if (!file_exists(PATH . '/../.installed')) {
       return true;
     } else {
       return false;
@@ -85,7 +86,7 @@ class App
     Database::setup();
 
     // Crea el archivo de marca de instalación
-    $file = fopen(__DIR__ . '/../../.installed', 'w');
+    $file = fopen(PATH . '/../.installed', 'w');
     fclose($file);
 
     // Añade a la sesión que ya se ha instalado
@@ -93,5 +94,19 @@ class App
 
     // Redirige a la página de inicio
     $this->redirect('/home');
+  }
+
+  public static function s3Client()
+  {
+    $s3Client = new S3Client([
+      'version' => 'latest',
+      'region'  => 'eu-west-3',
+      'credentials' => [
+        'key'    => $_ENV['AWS_ACCESS_KEY_ID'],
+        'secret' => $_ENV['AWS_SECRET_ACCESS_KEY']
+      ]
+    ]);
+
+    return $s3Client;
   }
 }
