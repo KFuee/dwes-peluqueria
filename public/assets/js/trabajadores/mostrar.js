@@ -17,6 +17,11 @@ function detallesFormatter(index, row) {
     }
 
     if (key == "servicios") {
+      if (value.length === 0) {
+        html.push("<p><b>" + key + ":</b> No tiene servicios</p>");
+        return;
+      }
+
       var servicios = "";
       for (let i = 0; i < value.length; i++) {
         var servicio = value[i];
@@ -42,6 +47,10 @@ function nombreCompletoFormatter(value, row, index) {
 }
 
 function serviciosFormatter(value, row, index) {
+  if (value.length === 0) {
+    return "No tiene servicios";
+  }
+
   var servicios = "";
   for (let i = 0; i < value.length; i++) {
     var servicio = value[i];

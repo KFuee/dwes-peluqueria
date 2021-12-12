@@ -9,7 +9,7 @@
   </style>
 </head>
 
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100 min-vh-100">
   <?php require(PATH . '/components/header.php'); ?>
 
   <div class="py-5 container">
