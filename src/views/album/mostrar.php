@@ -60,7 +60,7 @@ $fotografias = Fotografia::all();
 
                       <!-- Botón eliminar -->
                       <?php if (isset($_SESSION['usuario'])) : ?>
-                        <?php if ($usuario['rol'] !== 'cliente') : ?>
+                        <?php if ($usuario->rol !== 'cliente') : ?>
                           <div class="btn-group">
                             <a href="/album/eliminar/<?= $fotografia->id ?>" class="btn btn-sm btn-outline-danger">Eliminar</a>
                           </div>
