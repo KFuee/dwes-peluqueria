@@ -5,4 +5,4 @@ CREATE TABLE IF NOT EXISTS `servicios` (
   `duracion` int(255) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4
