@@ -72,10 +72,17 @@ class Database
       $db->exec($sql);
     }
 
-    // Crea el usuario administrador por defecto
-    $password = password_hash("peluqueria123", PASSWORD_DEFAULT);
-    $sql = "INSERT INTO usuarios (nombre, apellidos, email, password, rol)
-            VALUES ('Administrador', 'Peluqueria', 'admin@peluqueria.com', '$password', 'administrador')";
-    $db->exec($sql);
+    /* Crea el usuario administrador por defecto
+    Hay ocasiones en las que se ha creado la base de datos pero no se
+    encuentra el archivo de configuración, por lo que el usuario se crea
+    varias veces. Por ello comprobamos antes si existe */
+    $usuario = Usuario::find("admin@peluqueria.com");
+    if ($usuario == null) {
+      $password = password_hash("peluqueria123", PASSWORD_DEFAULT);
+      $sql = "INSERT INTO usuarios (nombre, apellidos, email, password, rol)
+              VALUES ('Administrador', 'Peluqueria', 'admin@peluqueria.com', '$password', 'administrador')";
+
+      $db->exec($sql);
+    }
   }
 }
